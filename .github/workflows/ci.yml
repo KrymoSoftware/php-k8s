@@ -37,6 +37,8 @@ jobs:
         exclude:
           - laravel: "11.*"
             php: "8.1"
+          - laravel: "12.*"
+            php: "8.1"
 
     name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }} - K8s v${{ matrix.kubernetes }} --${{ matrix.prefer }}
 
