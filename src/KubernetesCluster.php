@@ -124,9 +124,9 @@ class KubernetesCluster
     /**
      * The Cluster API port.
      *
-     * @var string
+     * @var ?string
      */
-    protected string $url;
+    protected ?string $url;
 
     /**
      * The class name for the K8s resource.
