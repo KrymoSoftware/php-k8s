@@ -14,8 +14,10 @@ use RenokiCo\PhpK8s\Exceptions\KubernetesExecException;
 use RenokiCo\PhpK8s\Exceptions\KubernetesLogsException;
 use RenokiCo\PhpK8s\Exceptions\KubernetesScalingException;
 use RenokiCo\PhpK8s\Exceptions\KubernetesWatchException;
+use RenokiCo\PhpK8s\Kinds\K8sResource;
 use RenokiCo\PhpK8s\Kinds\K8sScale;
 use RenokiCo\PhpK8s\KubernetesCluster;
+use RenokiCo\PhpK8s\ResourcesList;
 
 trait RunsClusterOperations
 {
@@ -187,11 +189,11 @@ trait RunsClusterOperations
      * Get a fresh instance from the cluster.
      *
      * @param  array  $query
-     * @return \RenokiCo\PhpK8s\Kinds\K8sResource
+     * @return K8sResource
      *
      * @throws \RenokiCo\PhpK8s\Exceptions\KubernetesAPIException
      */
-    public function get(array $query = ['pretty' => 1]): \RenokiCo\PhpK8s\Kinds\K8sResource
+    public function get(array $query = ['pretty' => 1]): K8sResource|ResourcesList
     {
         return $this->cluster
             ->setResourceClass(get_class($this))
@@ -207,11 +209,11 @@ trait RunsClusterOperations
      * Create the resource.
      *
      * @param  array  $query
-     * @return \RenokiCo\PhpK8s\Kinds\K8sResource
+     * @return K8sResource
      *
      * @throws \RenokiCo\PhpK8s\Exceptions\KubernetesAPIException
      */
-    public function create(array $query = ['pretty' => 1]): \RenokiCo\PhpK8s\Kinds\K8sResource
+    public function create(array $query = ['pretty' => 1]): K8sResource
     {
         return $this->cluster
             ->setResourceClass(get_class($this))
