@@ -10,6 +10,7 @@ use RenokiCo\PhpK8s\Exceptions\KubeConfigClusterNotFound;
 use RenokiCo\PhpK8s\Exceptions\KubeConfigContextNotFound;
 use RenokiCo\PhpK8s\Exceptions\KubeConfigUserNotFound;
 use RenokiCo\PhpK8s\Kinds\K8sResource;
+use RenokiCo\PhpK8s\KubernetesCluster;
 
 trait LoadsFromKubeConfig
 {
@@ -38,15 +39,15 @@ trait LoadsFromKubeConfig
      * according to the current KUBECONFIG environment variable.
      *
      * @param  string|null  $context
-     * @return \RenokiCo\PhpK8s\KubernetesCluster
+     * @return KubernetesCluster
      *
      * @throws \RenokiCo\PhpK8s\Exceptions\KubeConfigClusterNotFound
      * @throws \RenokiCo\PhpK8s\Exceptions\KubeConfigContextNotFound
      * @throws \RenokiCo\PhpK8s\Exceptions\KubeConfigUserNotFound
      */
-    public static function fromKubeConfigVariable(?string $context = null): \RenokiCo\PhpK8s\KubernetesCluster
+    public static function fromKubeConfigVariable(?string $context = null): KubernetesCluster
     {
-        /** @var \RenokiCo\PhpK8s\KubernetesCluster $this */
+        /** @var KubernetesCluster $this */
         $cluster = new static;
 
         if (! isset($_SERVER['KUBECONFIG'])) {
@@ -80,11 +81,11 @@ trait LoadsFromKubeConfig
      *
      * @param  string  $yaml
      * @param  string|null  $context
-     * @return \RenokiCo\PhpK8s\KubernetesCluster
+     * @return KubernetesCluster
      */
-    public static function fromKubeConfigYaml(string $yaml, string $context = null)
+    public static function fromKubeConfigYaml(string $yaml, ?string $context = null): KubernetesCluster
     {
-        /** @var \RenokiCo\PhpK8s\KubernetesCluster $this */
+        /** @var KubernetesCluster $this */
         $cluster = new static;
 
         return $cluster->loadKubeConfigFromArray(yaml_parse($yaml), $context);
@@ -95,9 +96,9 @@ trait LoadsFromKubeConfig
      *
      * @param  string  $path
      * @param  string|null  $context
-     * @return \RenokiCo\PhpK8s\KubernetesCluster
+     * @return KubernetesCluster
      */
-    public static function fromKubeConfigYamlFile(string $path = '/.kube/config', string $context = null)
+    public static function fromKubeConfigYamlFile(string $path = '/.kube/config', ?string $context = null): KubernetesCluster
     {
         return (new static)->fromKubeConfigYaml(file_get_contents($path), $context);
     }
@@ -107,9 +108,9 @@ trait LoadsFromKubeConfig
      *
      * @param  array  $kubeConfigArray
      * @param  string|null  $context
-     * @return \RenokiCo\PhpK8s\KubernetesCluster
+     * @return KubernetesCluster
      */
-    public static function fromKubeConfigArray(array $kubeConfigArray, string $context = null)
+    public static function fromKubeConfigArray(array $kubeConfigArray, ?string $context = null): KubernetesCluster
     {
         $cluster = new static;
 
@@ -122,15 +123,15 @@ trait LoadsFromKubeConfig
      *
      * @param  array  $kubeconfig
      * @param  string|null  $context
-     * @return \RenokiCo\PhpK8s\KubernetesCluster
+     * @return KubernetesCluster
      *
      * @throws \RenokiCo\PhpK8s\Exceptions\KubeConfigClusterNotFound
      * @throws \RenokiCo\PhpK8s\Exceptions\KubeConfigContextNotFound
      * @throws \RenokiCo\PhpK8s\Exceptions\KubeConfigUserNotFound
      */
-    protected function loadKubeConfigFromArray(array $kubeconfig, string $context = null)
+    protected function loadKubeConfigFromArray(array $kubeconfig, ?string $context = null): KubernetesCluster
     {
-        /** @var \RenokiCo\PhpK8s\KubernetesCluster $this */
+        /** @var KubernetesCluster $this */
 
         // Compute the context from the method, or in case it is passed as null
         // try to find it from the current kubeconfig's "current-context" field.
@@ -254,8 +255,9 @@ trait LoadsFromKubeConfig
         string $url,
         string $fileName,
         string $contents
-    ) {
-        /** @var \RenokiCo\PhpK8s\KubernetesCluster $this */
+    ): string
+    {
+        /** @var KubernetesCluster $this */
         $tempFolder = static::$tempFolder ?: sys_get_temp_dir();
 
         $tempFilePath = $tempFolder.DIRECTORY_SEPARATOR.Str::slug("ctx-{$context}-{$userName}-{$url}")."-{$fileName}";
@@ -286,7 +288,7 @@ trait LoadsFromKubeConfig
      */
     protected static function mergeKubeconfigContents(array $kubeconfig1, array $kubeconfig2): array
     {
-        /** @var \RenokiCo\PhpK8s\KubernetesCluster $this */
+        /** @var KubernetesCluster $this */
         $kubeconfig1 += $kubeconfig2;
 
         foreach ($kubeconfig1 as $key => $value) {
