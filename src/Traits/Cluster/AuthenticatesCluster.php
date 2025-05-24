@@ -13,7 +13,7 @@ trait AuthenticatesCluster
      *
      * @var string|null
      */
-    private ?string $token;
+    private ?string $token = null;
 
     /**
      * The key pair of username & password used
@@ -29,7 +29,7 @@ trait AuthenticatesCluster
      *
      * @var string|null
      */
-    private ?string $cert;
+    private ?string $cert = null;
 
     /**
      * The path to the Client Key (if any)
@@ -37,7 +37,7 @@ trait AuthenticatesCluster
      *
      * @var string|null
      */
-    private ?string $sslKey;
+    private ?string $sslKey = null;
 
     /**
      * Wether SSL should be verified. Defaults to true,
@@ -46,7 +46,7 @@ trait AuthenticatesCluster
      *
      * @var string|null|bool
      */
-    private string|bool|null $verify;
+    private string|bool|null $verify = null;
 
     /**
      * Start the current cluster with URL.
