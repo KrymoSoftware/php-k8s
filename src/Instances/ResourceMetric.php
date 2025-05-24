@@ -132,9 +132,9 @@ class ResourceMetric extends Instance
     /**
      * Get the resource metric name.
      *
-     * @return $this
+     * @return string
      */
-    public function getName(): self
+    public function getName(): string
     {
         return $this->getAttribute('resource.name');
     }

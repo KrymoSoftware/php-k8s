@@ -11,7 +11,7 @@ trait HasPods
      *
      * @var Closure|null
      */
-    protected static ?Closure $podSelectorCallback;
+    protected static ?Closure $podSelectorCallback = null;
 
     /**
      * Get the selector for the pods that are owned by this resource.

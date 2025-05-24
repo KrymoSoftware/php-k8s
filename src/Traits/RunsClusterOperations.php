@@ -446,18 +446,18 @@ trait RunsClusterOperations
      * Exec a command on the current resource.
      *
      * @param array|string $command
-     * @param  string|null  $container
-     * @param  array  $query
-     * @return string
+     * @param string|null $container
+     * @param array $query
+     * @return array
      *
-     * @throws \RenokiCo\PhpK8s\Exceptions\KubernetesExecException
-     * @throws \RenokiCo\PhpK8s\Exceptions\KubernetesAPIException
+     * @throws KubernetesAPIException
+     * @throws KubernetesExecException
      */
     public function exec(
         array|string $command,
         ?string      $container = null,
         array        $query = ['pretty' => 1, 'stdin' => 1, 'stdout' => 1, 'stderr' => 1, 'tty' => 1]
-    ): string
+    ): array
     {
         if (! $this instanceof Executable) {
             throw new KubernetesExecException(
@@ -478,19 +478,19 @@ trait RunsClusterOperations
     /**
      * Attach to the current resource.
      *
-     * @param  \Closure|null  $callback
-     * @param  string|null  $container
-     * @param  array  $query
-     * @return string
+     * @param \Closure|null $callback
+     * @param string|null $container
+     * @param array $query
+     * @return array
      *
-     * @throws \RenokiCo\PhpK8s\Exceptions\KubernetesAttachException
-     * @throws \RenokiCo\PhpK8s\Exceptions\KubernetesAPIException
+     * @throws KubernetesAPIException
+     * @throws KubernetesAttachException
      */
     public function attach(
         ?Closure $callback = null,
         ?string $container = null,
         array $query = ['pretty' => 1, 'stdin' => 1, 'stdout' => 1, 'stderr' => 1, 'tty' => 1]
-    ): string
+    ): array
     {
         if (! $this instanceof Attachable) {
             throw new KubernetesAttachException(

@@ -118,9 +118,9 @@ class ResourceObject extends ResourceMetric
     /**
      * Get the resource metric name.
      *
-     * @return $this
+     * @return string
      */
-    public function getName(): self
+    public function getName(): string
     {
         return $this->getAttribute('object.metric.name');
     }
