@@ -18,14 +18,14 @@ class K8sService extends K8sResource implements Dnsable, InteractsWithK8sCluster
      *
      * @var null|string
      */
-    protected static ?string $kind = 'Service';
+    protected static $kind = 'Service';
 
     /**
      * Wether the resource has a namespace.
      *
      * @var bool
      */
-    protected static bool $namespaceable = true;
+    protected static $namespaceable = true;
 
     /**
      * Get the DNS name within the cluster.

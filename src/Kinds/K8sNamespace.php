@@ -17,7 +17,7 @@ class K8sNamespace extends K8sResource implements InteractsWithK8sCluster, Watch
      *
      * @var null|string
      */
-    protected static ?string $kind = 'Namespace';
+    protected static $kind = 'Namespace';
 
     /**
      * Check if the namespace is active.

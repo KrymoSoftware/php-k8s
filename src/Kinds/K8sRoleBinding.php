@@ -15,21 +15,21 @@ class K8sRoleBinding extends K8sResource implements InteractsWithK8sCluster, Wat
      *
      * @var null|string
      */
-    protected static ?string $kind = 'RoleBinding';
+    protected static $kind = 'RoleBinding';
 
     /**
      * Wether the resource has a namespace.
      *
      * @var bool
      */
-    protected static bool $namespaceable = true;
+    protected static $namespaceable = true;
 
     /**
      * The default version for the resource.
      *
      * @var string
      */
-    protected static string $defaultVersion = 'rbac.authorization.k8s.io/v1';
+    protected static $defaultVersion = 'rbac.authorization.k8s.io/v1';
 
     /**
      * Attach a Role/ClusterRole to the binding.

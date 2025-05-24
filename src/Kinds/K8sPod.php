@@ -35,14 +35,14 @@ class K8sPod extends K8sResource implements
      *
      * @var null|string
      */
-    protected static ?string $kind = 'Pod';
+    protected static $kind = 'Pod';
 
     /**
      * Wether the resource has a namespace.
      *
      * @var bool
      */
-    protected static bool $namespaceable = true;
+    protected static $namespaceable = true;
 
     /**
      * Get the DNS name within the cluster.

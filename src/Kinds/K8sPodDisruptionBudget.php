@@ -19,21 +19,21 @@ class K8sPodDisruptionBudget extends K8sResource implements InteractsWithK8sClus
      *
      * @var null|string
      */
-    protected static ?string $kind = 'PodDisruptionBudget';
+    protected static $kind = 'PodDisruptionBudget';
 
     /**
      * Wether the resource has a namespace.
      *
      * @var bool
      */
-    protected static bool $namespaceable = true;
+    protected static $namespaceable = true;
 
     /**
      * The default version for the resource.
      *
      * @var string
      */
-    protected static string $defaultVersion = 'policy/v1';
+    protected static $defaultVersion = 'policy/v1';
 
     /**
      * Set the maximum unavailable pod budget and

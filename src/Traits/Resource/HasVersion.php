@@ -11,7 +11,7 @@ trait HasVersion
      *
      * @var string
      */
-    protected static string $defaultVersion = 'v1';
+    protected static $defaultVersion = 'v1';
 
     /**
      * Overwrite, at runtime, the stable version of the resource.

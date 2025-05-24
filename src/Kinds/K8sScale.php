@@ -16,7 +16,7 @@ class K8sScale extends K8sResource implements InteractsWithK8sCluster
      *
      * @var null|string
      */
-    protected static ?string $kind = 'Scale';
+    protected static $kind = 'Scale';
 
     /**
      * The original scalable resource for this scale.
@@ -30,14 +30,14 @@ class K8sScale extends K8sResource implements InteractsWithK8sCluster
      *
      * @var bool
      */
-    protected static bool $namespaceable = true;
+    protected static $namespaceable = true;
 
     /**
      * The default version for the resource.
      *
      * @var string
      */
-    protected static string $defaultVersion = 'autoscaling/v1';
+    protected static $defaultVersion = 'autoscaling/v1';
 
     /**
      * Get the path, prefixed by '/', that points to the specific resource.

@@ -15,19 +15,19 @@ class K8sRole extends K8sResource implements InteractsWithK8sCluster, Watchable
      *
      * @var null|string
      */
-    protected static ?string $kind = 'Role';
+    protected static $kind = 'Role';
 
     /**
      * Whether the resource has a namespace.
      *
      * @var bool
      */
-    protected static bool $namespaceable = true;
+    protected static $namespaceable = true;
 
     /**
      * The default version for the resource.
      *
      * @var string
      */
-    protected static string $defaultVersion = 'rbac.authorization.k8s.io/v1';
+    protected static $defaultVersion = 'rbac.authorization.k8s.io/v1';
 }

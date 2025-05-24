@@ -15,14 +15,14 @@ class K8sSecret extends K8sResource implements InteractsWithK8sCluster, Watchabl
      *
      * @var null|string
      */
-    protected static ?string $kind = 'Secret';
+    protected static $kind = 'Secret';
 
     /**
      * Wether the resource has a namespace.
      *
      * @var bool
      */
-    protected static bool $namespaceable = true;
+    protected static $namespaceable = true;
 
     /**
      * Get the data attribute.

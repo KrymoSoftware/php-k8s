@@ -21,21 +21,21 @@ class K8sHorizontalPodAutoscaler extends K8sResource implements InteractsWithK8s
      *
      * @var null|string
      */
-    protected static ?string $kind = 'HorizontalPodAutoscaler';
+    protected static $kind = 'HorizontalPodAutoscaler';
 
     /**
      * The default version for the resource.
      *
      * @var string
      */
-    protected static string $defaultVersion = 'autoscaling/v2';
+    protected static $defaultVersion = 'autoscaling/v2';
 
     /**
      * Wether the resource has a namespace.
      *
      * @var bool
      */
-    protected static bool $namespaceable = true;
+    protected static $namespaceable = true;
 
     /**
      * Set the reference to the scaling resource.

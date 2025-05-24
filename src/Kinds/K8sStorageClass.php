@@ -12,14 +12,14 @@ class K8sStorageClass extends K8sResource implements InteractsWithK8sCluster, Wa
      *
      * @var null|string
      */
-    protected static ?string $kind = 'StorageClass';
+    protected static $kind = 'StorageClass';
 
     /**
      * The default version for the resource.
      *
      * @var string
      */
-    protected static string $defaultVersion = 'storage.k8s.io/v1';
+    protected static $defaultVersion = 'storage.k8s.io/v1';
 
     /**
      * Set the mount options.

@@ -32,21 +32,21 @@ class K8sJob extends K8sResource implements
      *
      * @var null|string
      */
-    protected static ?string $kind = 'Job';
+    protected static $kind = 'Job';
 
     /**
      * The default version for the resource.
      *
      * @var string
      */
-    protected static string $defaultVersion = 'batch/v1';
+    protected static $defaultVersion = 'batch/v1';
 
     /**
      * Wether the resource has a namespace.
      *
      * @var bool
      */
-    protected static bool $namespaceable = true;
+    protected static $namespaceable = true;
 
     /**
      * Set the TTL for the job availability.

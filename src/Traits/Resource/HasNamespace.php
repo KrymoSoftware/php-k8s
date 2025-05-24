@@ -13,14 +13,14 @@ trait HasNamespace
      *
      * @var bool
      */
-    protected static bool $namespaceable = false;
+    protected static $namespaceable = false;
 
     /**
      * The default namespace for the resource.
      *
      * @var string
      */
-    public static string $defaultNamespace = 'default';
+    public static $defaultNamespace = 'default';
 
     /**
      * Overwrite, at runtime, the default namespace for the resource.

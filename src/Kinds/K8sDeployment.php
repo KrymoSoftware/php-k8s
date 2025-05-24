@@ -39,21 +39,21 @@ class K8sDeployment extends K8sResource implements
      *
      * @var null|string
      */
-    protected static ?string $kind = 'Deployment';
+    protected static $kind = 'Deployment';
 
     /**
      * The default version for the resource.
      *
      * @var string
      */
-    protected static string $defaultVersion = 'apps/v1';
+    protected static $defaultVersion = 'apps/v1';
 
     /**
      * Wether the resource has a namespace.
      *
      * @var bool
      */
-    protected static bool $namespaceable = true;
+    protected static $namespaceable = true;
 
     /**
      * Set the updating strategy for the deployment.

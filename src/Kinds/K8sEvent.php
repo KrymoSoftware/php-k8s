@@ -12,14 +12,14 @@ class K8sEvent extends K8sResource implements InteractsWithK8sCluster, Watchable
      *
      * @var null|string
      */
-    protected static ?string $kind = 'Event';
+    protected static $kind = 'Event';
 
     /**
      * Wether the resource has a namespace.
      *
      * @var bool
      */
-    protected static bool $namespaceable = true;
+    protected static $namespaceable = true;
 
     /**
      * Attach the given resource to the event.
