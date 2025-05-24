@@ -154,15 +154,15 @@ class KubernetesCluster
         self::ATTACH_OP => 'POST',
     ];
 
-    const string GET_OP = 'get';
-    const string CREATE_OP = 'create';
-    const string REPLACE_OP = 'replace';
-    const string DELETE_OP = 'delete';
-    const string LOG_OP = 'logs';
-    const string WATCH_OP = 'watch';
-    const string WATCH_LOGS_OP = 'watch_logs';
-    const string EXEC_OP = 'exec';
-    const string ATTACH_OP = 'attach';
+    public const string GET_OP = 'get';
+    public const string CREATE_OP = 'create';
+    public const string REPLACE_OP = 'replace';
+    public const string DELETE_OP = 'delete';
+    public const string LOG_OP = 'logs';
+    public const string WATCH_OP = 'watch';
+    public const string WATCH_LOGS_OP = 'watch_logs';
+    public const string EXEC_OP = 'exec';
+    public const string ATTACH_OP = 'attach';
 
     /**
      * Create a new class instance.
