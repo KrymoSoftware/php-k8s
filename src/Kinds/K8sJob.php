@@ -32,21 +32,21 @@ class K8sJob extends K8sResource implements
      *
      * @var null|string
      */
-    protected static $kind = 'Job';
+    protected static ?string $kind = 'Job';
 
     /**
      * The default version for the resource.
      *
      * @var string
      */
-    protected static $defaultVersion = 'batch/v1';
+    protected static string $defaultVersion = 'batch/v1';
 
     /**
      * Wether the resource has a namespace.
      *
      * @var bool
      */
-    protected static $namespaceable = true;
+    protected static bool $namespaceable = true;
 
     /**
      * Set the TTL for the job availability.
@@ -54,7 +54,7 @@ class K8sJob extends K8sResource implements
      * @param  int  $ttl
      * @return $this
      */
-    public function setTTL(int $ttl = 100)
+    public function setTTL(int $ttl = 100): self
     {
         return $this->setSpec('ttlSecondsAfterFinished', $ttl);
     }
@@ -110,7 +110,7 @@ class K8sJob extends K8sResource implements
      *
      * @return \DateTime|null
      */
-    public function getStartTime()
+    public function getStartTime(): ?Carbon
     {
         $time = $this->getStatus('startTime', null);
 
@@ -122,7 +122,7 @@ class K8sJob extends K8sResource implements
      *
      * @return \DateTime|null
      */
-    public function getCompletionTime()
+    public function getCompletionTime(): ?Carbon
     {
         $time = $this->getStatus('completionTime', null);
 

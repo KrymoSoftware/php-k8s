@@ -10,7 +10,7 @@ class Rule extends Instance
      * @param  string  $apiGroup
      * @return $this
      */
-    public function addApiGroup(string $apiGroup)
+    public function addApiGroup(string $apiGroup): self
     {
         return $this->addToAttribute('apiGroups', $apiGroup);
     }
@@ -21,7 +21,7 @@ class Rule extends Instance
      * @param  array  $apiGroups
      * @return $this
      */
-    public function addApiGroups(array $apiGroups)
+    public function addApiGroups(array $apiGroups): self
     {
         foreach ($apiGroups as $apiGroup) {
             $this->addApiGroup($apiGroup);
@@ -35,7 +35,7 @@ class Rule extends Instance
      *
      * @return $this
      */
-    public function core()
+    public function core(): self
     {
         return $this->addApiGroups(['']);
     }
@@ -46,7 +46,7 @@ class Rule extends Instance
      * @param  string  $resource
      * @return $this
      */
-    public function addResource(string $resource)
+    public function addResource(string $resource): self
     {
         if (class_exists($resource)) {
             $resource = $resource::getPlural();
@@ -61,7 +61,7 @@ class Rule extends Instance
      * @param  array  $resources
      * @return $this
      */
-    public function addResources(array $resources)
+    public function addResources(array $resources): self
     {
         foreach ($resources as $resource) {
             $this->addResource($resource);
@@ -76,7 +76,7 @@ class Rule extends Instance
      * @param  string  $name
      * @return $this
      */
-    public function addResourceName(string $name)
+    public function addResourceName(string $name): self
     {
         return $this->addToAttribute('resourceNames', $name);
     }
@@ -84,10 +84,10 @@ class Rule extends Instance
     /**
      * Batch-add multiple resource names.
      *
-     * @param  array  $resources
+     * @param array $resourceNames
      * @return $this
      */
-    public function addResourceNames(array $resourceNames)
+    public function addResourceNames(array $resourceNames): self
     {
         foreach ($resourceNames as $name) {
             $this->addResourceName($name);
@@ -102,7 +102,7 @@ class Rule extends Instance
      * @param  string  $verb
      * @return $this
      */
-    public function addVerb(string $verb)
+    public function addVerb(string $verb): self
     {
         return $this->addToAttribute('verbs', $verb);
     }
@@ -113,7 +113,7 @@ class Rule extends Instance
      * @param  array  $verbs
      * @return $this
      */
-    public function addVerbs(array $verbs)
+    public function addVerbs(array $verbs): self
     {
         foreach ($verbs as $verb) {
             $this->addVerb($verb);

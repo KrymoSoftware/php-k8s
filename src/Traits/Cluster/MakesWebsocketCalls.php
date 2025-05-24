@@ -18,7 +18,7 @@ trait MakesWebsocketCalls
      *
      * @var array
      */
-    protected static $stdChannels = [
+    protected static array $stdChannels = [
         'stdin',
         'stdout',
         'stderr',
@@ -141,9 +141,9 @@ trait MakesWebsocketCalls
      * @param  string  $path
      * @param  Closure|null  $callback
      * @param  array  $query
-     * @return mixed
+     * @return array
      */
-    protected function makeWsRequest(string $path, Closure $callback = null, array $query = ['pretty' => 1])
+    protected function makeWsRequest(string $path, ?Closure $callback = null, array $query = ['pretty' => 1]): array
     {
         $url = $this->getCallableUrl($path, $query);
 

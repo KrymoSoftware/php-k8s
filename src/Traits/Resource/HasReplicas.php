@@ -12,7 +12,7 @@ trait HasReplicas
      * @param  int  $replicas
      * @return $this
      */
-    public function setReplicas(int $replicas = 1)
+    public function setReplicas(int $replicas = 1): self
     {
         return $this->setSpec('replicas', $replicas);
     }

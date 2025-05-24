@@ -39,31 +39,31 @@ class K8sDeployment extends K8sResource implements
      *
      * @var null|string
      */
-    protected static $kind = 'Deployment';
+    protected static ?string $kind = 'Deployment';
 
     /**
      * The default version for the resource.
      *
      * @var string
      */
-    protected static $defaultVersion = 'apps/v1';
+    protected static string $defaultVersion = 'apps/v1';
 
     /**
      * Wether the resource has a namespace.
      *
      * @var bool
      */
-    protected static $namespaceable = true;
+    protected static bool $namespaceable = true;
 
     /**
      * Set the updating strategy for the deployment.
      *
      * @param  string  $strategy
-     * @param  int|string  $maxUnavailable
-     * @param  int|string  $maxSurge
+     * @param int|string $maxUnavailable
+     * @param int|string $maxSurge
      * @return $this
      */
-    public function setUpdateStrategy(string $strategy, $maxUnavailable = '25%', $maxSurge = '25%')
+    public function setUpdateStrategy(string $strategy, int|string $maxUnavailable = '25%', int|string $maxSurge = '25%'): self
     {
         if ($strategy === 'RollingUpdate') {
             $this->setSpec('updateStrategy.rollingUpdate.maxUnavailable', $maxUnavailable);

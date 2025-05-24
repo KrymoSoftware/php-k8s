@@ -16,28 +16,28 @@ class K8sScale extends K8sResource implements InteractsWithK8sCluster
      *
      * @var null|string
      */
-    protected static $kind = 'Scale';
+    protected static ?string $kind = 'Scale';
 
     /**
      * The original scalable resource for this scale.
      *
      * @var \RenokiCo\PhpK8s\Kinds\K8sResource
      */
-    protected $resource;
+    protected K8sResource $resource;
 
     /**
      * Wether the resource has a namespace.
      *
      * @var bool
      */
-    protected static $namespaceable = true;
+    protected static bool $namespaceable = true;
 
     /**
      * The default version for the resource.
      *
      * @var string
      */
-    protected static $defaultVersion = 'autoscaling/v1';
+    protected static string $defaultVersion = 'autoscaling/v1';
 
     /**
      * Get the path, prefixed by '/', that points to the specific resource.
@@ -55,7 +55,7 @@ class K8sScale extends K8sResource implements InteractsWithK8sCluster
      * @param  \RenokiCo\PhpK8s\Kinds\K8sResource  $resource
      * @return $this
      */
-    public function setScalableResource(K8sResource $resource)
+    public function setScalableResource(K8sResource $resource): self
     {
         $this->resource = $resource;
 
@@ -68,7 +68,7 @@ class K8sScale extends K8sResource implements InteractsWithK8sCluster
      * @param  array  $query
      * @return $this
      */
-    public function refresh(array $query = ['pretty' => 1])
+    public function refresh(array $query = ['pretty' => 1]): self
     {
         $this->resource->refresh($query);
 
@@ -81,7 +81,7 @@ class K8sScale extends K8sResource implements InteractsWithK8sCluster
      * @param  array  $query
      * @return $this
      */
-    public function refreshOriginal(array $query = ['pretty' => 1])
+    public function refreshOriginal(array $query = ['pretty' => 1]): self
     {
         $this->resource->refreshOriginal($query);
 

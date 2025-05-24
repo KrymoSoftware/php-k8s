@@ -20,7 +20,7 @@ trait LoadsFromKubeConfig
      *
      * @var null|string
      */
-    protected static $tempFolder;
+    protected static ?string $tempFolder;
 
     /**
      * Set the temporary folder for the writings.
@@ -28,7 +28,7 @@ trait LoadsFromKubeConfig
      * @param  string  $tempFolder
      * @return void
      */
-    public static function setTempFolder(string $tempFolder)
+    public static function setTempFolder(string $tempFolder): void
     {
         static::$tempFolder = $tempFolder;
     }
@@ -44,7 +44,7 @@ trait LoadsFromKubeConfig
      * @throws \RenokiCo\PhpK8s\Exceptions\KubeConfigContextNotFound
      * @throws \RenokiCo\PhpK8s\Exceptions\KubeConfigUserNotFound
      */
-    public static function fromKubeConfigVariable(string $context = null)
+    public static function fromKubeConfigVariable(?string $context = null): \RenokiCo\PhpK8s\KubernetesCluster
     {
         /** @var \RenokiCo\PhpK8s\KubernetesCluster $this */
         $cluster = new static;

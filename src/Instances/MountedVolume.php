@@ -10,7 +10,7 @@ class MountedVolume extends Instance
      * @param  \RenokiCo\PhpK8s\Instances\Volume  $volume
      * @return $this
      */
-    public static function from(Volume $volume)
+    public static function from(Volume $volume): self
     {
         return (new static)->setName($volume->getName());
     }
@@ -20,7 +20,7 @@ class MountedVolume extends Instance
      *
      * @return $this
      */
-    public function readOnly()
+    public function readOnly(): self
     {
         return $this->setAttribute('readOnly', true);
     }
@@ -32,7 +32,7 @@ class MountedVolume extends Instance
      * @param  string|null  $subPath
      * @return $this
      */
-    public function mountTo(string $mountPath, string $subPath = null)
+    public function mountTo(string $mountPath, ?string $subPath = null): self
     {
         $this->setMountPath($mountPath);
 

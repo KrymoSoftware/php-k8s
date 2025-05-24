@@ -15,21 +15,21 @@ class K8sIngress extends K8sResource implements InteractsWithK8sCluster, Watchab
      *
      * @var null|string
      */
-    protected static $kind = 'Ingress';
+    protected static ?string $kind = 'Ingress';
 
     /**
      * The default version for the resource.
      *
      * @var string
      */
-    protected static $defaultVersion = 'networking.k8s.io/v1';
+    protected static string $defaultVersion = 'networking.k8s.io/v1';
 
     /**
      * Wether the resource has a namespace.
      *
      * @var bool
      */
-    protected static $namespaceable = true;
+    protected static bool $namespaceable = true;
 
     /**
      * Set the spec rules.
@@ -37,7 +37,7 @@ class K8sIngress extends K8sResource implements InteractsWithK8sCluster, Watchab
      * @param  array  $rules
      * @return $this
      */
-    public function setRules(array $rules = [])
+    public function setRules(array $rules = []): self
     {
         return $this->setSpec('rules', $rules);
     }
@@ -48,7 +48,7 @@ class K8sIngress extends K8sResource implements InteractsWithK8sCluster, Watchab
      * @param  array  $rule
      * @return $this
      */
-    public function addRule(array $rule)
+    public function addRule(array $rule): self
     {
         return $this->addToSpec('rules', $rule);
     }
@@ -59,7 +59,7 @@ class K8sIngress extends K8sResource implements InteractsWithK8sCluster, Watchab
      * @param  array  $rules
      * @return $this
      */
-    public function addRules(array $rules)
+    public function addRules(array $rules): self
     {
         foreach ($rules as $rule) {
             $this->addRule($rule);
@@ -84,7 +84,7 @@ class K8sIngress extends K8sResource implements InteractsWithK8sCluster, Watchab
      * @param  array  $tlsData
      * @return $this
      */
-    public function setTls(array $tlsData = [])
+    public function setTls(array $tlsData = []): self
     {
         return $this->setSpec('tls', $tlsData);
     }

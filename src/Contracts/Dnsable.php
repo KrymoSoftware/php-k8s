@@ -9,5 +9,5 @@ interface Dnsable
      *
      * @return string|null
      */
-    public function getClusterDns();
+    public function getClusterDns(): ?string;
 }

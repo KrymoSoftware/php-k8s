@@ -25,14 +25,14 @@ class K8sPersistentVolumeClaim extends K8sResource implements InteractsWithK8sCl
      *
      * @var null|string
      */
-    protected static $kind = 'PersistentVolumeClaim';
+    protected static ?string $kind = 'PersistentVolumeClaim';
 
     /**
      * Wether the resource has a namespace.
      *
      * @var bool
      */
-    protected static $namespaceable = true;
+    protected static bool $namespaceable = true;
 
     /**
      * Set the capacity of the PV.
@@ -41,7 +41,7 @@ class K8sPersistentVolumeClaim extends K8sResource implements InteractsWithK8sCl
      * @param  string  $measure
      * @return $this
      */
-    public function setCapacity(int $size, string $measure = 'Gi')
+    public function setCapacity(int $size, string $measure = 'Gi'): self
     {
         return $this->setSpec('resources.requests.storage', $size.$measure);
     }
@@ -51,7 +51,7 @@ class K8sPersistentVolumeClaim extends K8sResource implements InteractsWithK8sCl
      *
      * @return string|null
      */
-    public function getCapacity()
+    public function getCapacity(): ?string
     {
         return $this->getSpec('resources.requests.storage', null);
     }

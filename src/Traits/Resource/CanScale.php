@@ -10,7 +10,7 @@ trait CanScale
      * @param  int  $replicas
      * @return \RenokiCo\PhpK8s\Kinds\K8sScale
      */
-    public function scale(int $replicas)
+    public function scale(int $replicas): \RenokiCo\PhpK8s\Kinds\K8sScale
     {
         $scaler = $this->scaler();
 

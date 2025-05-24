@@ -12,10 +12,10 @@ class Probe extends Instance
      */
     public function __construct(array $attributes = [])
     {
-        $this->attributes = array_merge([
+        parent::__construct(array_merge([
             'failureThreshold' => 1,
             'successThreshold' => 1,
-        ], $attributes);
+        ], $attributes));
     }
 
     /**
@@ -24,7 +24,7 @@ class Probe extends Instance
      * @param  array  $command
      * @return $this
      */
-    public function command(array $command)
+    public function command(array $command): self
     {
         return $this->setAttribute('exec.command', $command);
     }
@@ -34,7 +34,7 @@ class Probe extends Instance
      *
      * @return array|null
      */
-    public function getCommand()
+    public function getCommand(): ?array
     {
         return $this->getAttribute('exec.command', null);
     }
@@ -48,7 +48,7 @@ class Probe extends Instance
      * @param  string  $scheme
      * @return $this
      */
-    public function http(string $path = '/healthz', int $port = 8080, array $headers = [], string $scheme = 'HTTP')
+    public function http(string $path = '/healthz', int $port = 8080, array $headers = [], string $scheme = 'HTTP'): self
     {
         $probeData = [
             'path' => $path,
@@ -69,10 +69,10 @@ class Probe extends Instance
      * Set the TCP checks for a given port.
      *
      * @param  int  $port
-     * @param  string  $host
+     * @param  ?string  $host
      * @return $this
      */
-    public function tcp(int $port, string $host = null)
+    public function tcp(int $port, ?string $host = null): self
     {
         if ($host) {
             $this->setAttribute('tcpSocket.host', $host);

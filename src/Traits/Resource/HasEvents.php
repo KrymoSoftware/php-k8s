@@ -10,7 +10,7 @@ trait HasEvents
      *
      * @return \RenokiCo\PhpK8s\Kinds\K8sEvent
      */
-    public function newEvent()
+    public function newEvent(): \RenokiCo\PhpK8s\Kinds\K8sEvent
     {
         return $this->cluster
             ->event()
@@ -24,7 +24,7 @@ trait HasEvents
      * @param  array  $query
      * @return \RenokiCo\PhpK8s\ResourcesList
      */
-    public function getEvents(array $query = ['pretty' => 1])
+    public function getEvents(array $query = ['pretty' => 1]): \RenokiCo\PhpK8s\ResourcesList
     {
         $fieldSelector = urldecode(http_build_query([
             'involvedObject.kind' => $this::getKind(),

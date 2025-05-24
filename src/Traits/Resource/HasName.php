@@ -12,7 +12,7 @@ trait HasName
      * @param  string  $name
      * @return $this
      */
-    public function setName(string $name)
+    public function setName(string $name): self
     {
         $this->setAttribute('metadata.name', $name);
 
@@ -25,7 +25,7 @@ trait HasName
      * @param  string  $name
      * @return $this
      */
-    public function whereName(string $name)
+    public function whereName(string $name): self
     {
         return $this->setName($name);
     }
@@ -35,7 +35,7 @@ trait HasName
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->getAttribute('metadata.name');
     }

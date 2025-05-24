@@ -12,7 +12,7 @@ trait HasAccessModes
      * @param  array  $accessModes
      * @return $this
      */
-    public function setAccessModes(array $accessModes)
+    public function setAccessModes(array $accessModes): self
     {
         return $this->setSpec('accessModes', $accessModes);
     }

@@ -11,7 +11,7 @@ class Expression extends Instance
      * @param  array  $value
      * @return $this
      */
-    public function in(string $name, array $values)
+    public function in(string $name, array $values): self
     {
         return $this->setAttribute('key', $name)
             ->setAttribute('operator', 'In')
@@ -25,7 +25,7 @@ class Expression extends Instance
      * @param  array  $value
      * @return $this
      */
-    public function notIn(string $name, array $values)
+    public function notIn(string $name, array $values): self
     {
         return $this->setAttribute('key', $name)
             ->setAttribute('operator', 'NotIn')
@@ -38,7 +38,7 @@ class Expression extends Instance
      * @param  string  $name
      * @return $this
      */
-    public function exists(string $name)
+    public function exists(string $name): self
     {
         return $this->setAttribute('key', $name)
             ->setAttribute('operator', 'Exists')
@@ -51,7 +51,7 @@ class Expression extends Instance
      * @param  string  $name
      * @return $this
      */
-    public function doesNotExist(string $name)
+    public function doesNotExist(string $name): self
     {
         return $this->setAttribute('key', $name)
             ->setAttribute('operator', 'DoesNotExists')
@@ -65,7 +65,7 @@ class Expression extends Instance
      * @param  int  $value
      * @return $this
      */
-    public function greaterThan(string $name, int $value)
+    public function greaterThan(string $name, int $value): self
     {
         return $this->setAttribute('key', $name)
             ->setAttribute('operator', 'Gt')
@@ -79,7 +79,7 @@ class Expression extends Instance
      * @param  int  $value
      * @return $this
      */
-    public function lessThan(string $name, int $value)
+    public function lessThan(string $name, int $value): self
     {
         return $this->setAttribute('key', $name)
             ->setAttribute('operator', 'Lt')

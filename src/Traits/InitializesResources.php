@@ -27,17 +27,18 @@ use RenokiCo\PhpK8s\Kinds\K8sServiceAccount;
 use RenokiCo\PhpK8s\Kinds\K8sStatefulSet;
 use RenokiCo\PhpK8s\Kinds\K8sStorageClass;
 use RenokiCo\PhpK8s\Kinds\K8sValidatingWebhookConfiguration;
+use RenokiCo\PhpK8s\KubernetesCluster;
 
 trait InitializesResources
 {
     /**
      * Create a new Node kind.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param KubernetesCluster|null $cluster
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Kinds\K8sNode
      */
-    public static function node($cluster = null, array $attributes = [])
+    public static function node(?KubernetesCluster $cluster = null, array $attributes = []): K8sNode
     {
         return new K8sNode($cluster, $attributes);
     }
@@ -45,11 +46,11 @@ trait InitializesResources
     /**
      * Create a new Event kind.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param KubernetesCluster|null $cluster
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Kinds\K8sEvent
      */
-    public static function event($cluster = null, array $attributes = [])
+    public static function event(?KubernetesCluster $cluster = null, array $attributes = []): K8sEvent
     {
         return new K8sEvent($cluster, $attributes);
     }
@@ -57,11 +58,11 @@ trait InitializesResources
     /**
      * Create a new Namespace kind.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param KubernetesCluster|null $cluster
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Kinds\K8sNamespace
      */
-    public static function namespace($cluster = null, array $attributes = [])
+    public static function namespace(?KubernetesCluster $cluster = null, array $attributes = []): K8sNamespace
     {
         return new K8sNamespace($cluster, $attributes);
     }
@@ -69,11 +70,11 @@ trait InitializesResources
     /**
      * Create a new ConfigMap kind.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param KubernetesCluster|null $cluster
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Kinds\K8sConfigMap
      */
-    public static function configmap($cluster = null, array $attributes = [])
+    public static function configmap(?KubernetesCluster $cluster = null, array $attributes = []): K8sConfigMap
     {
         return new K8sConfigMap($cluster, $attributes);
     }
@@ -81,11 +82,11 @@ trait InitializesResources
     /**
      * Create a new Secret kind.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param KubernetesCluster|null $cluster
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Kinds\K8sSecret
      */
-    public static function secret($cluster = null, array $attributes = [])
+    public static function secret(?KubernetesCluster $cluster = null, array $attributes = []): K8sSecret
     {
         return new K8sSecret($cluster, $attributes);
     }
@@ -93,11 +94,11 @@ trait InitializesResources
     /**
      * Create a new Ingress kind.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param KubernetesCluster|null $cluster
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Kinds\K8sIngress
      */
-    public static function ingress($cluster = null, array $attributes = [])
+    public static function ingress(?KubernetesCluster $cluster = null, array $attributes = []): K8sIngress
     {
         return new K8sIngress($cluster, $attributes);
     }
@@ -105,11 +106,11 @@ trait InitializesResources
     /**
      * Create a new Service kind.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param KubernetesCluster|null $cluster
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Kinds\K8sService
      */
-    public static function service($cluster = null, array $attributes = [])
+    public static function service(?KubernetesCluster $cluster = null, array $attributes = []): K8sService
     {
         return new K8sService($cluster, $attributes);
     }
@@ -117,11 +118,11 @@ trait InitializesResources
     /**
      * Create a new StorageClass kind.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param KubernetesCluster|null $cluster
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Kinds\K8sStorageClass
      */
-    public static function storageClass($cluster = null, array $attributes = [])
+    public static function storageClass(?KubernetesCluster $cluster = null, array $attributes = []): K8sStorageClass
     {
         return new K8sStorageClass($cluster, $attributes);
     }
@@ -129,11 +130,11 @@ trait InitializesResources
     /**
      * Create a new PersistentVolume kind.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param KubernetesCluster|null $cluster
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Kinds\K8sPersistentVolume
      */
-    public static function persistentVolume($cluster = null, array $attributes = [])
+    public static function persistentVolume(?KubernetesCluster $cluster = null, array $attributes = []): K8sPersistentVolume
     {
         return new K8sPersistentVolume($cluster, $attributes);
     }
@@ -141,11 +142,11 @@ trait InitializesResources
     /**
      * Create a new PersistentVolumeClaim kind.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param KubernetesCluster|null $cluster
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Kinds\K8sPersistentVolumeClaim
      */
-    public static function persistentVolumeClaim($cluster = null, array $attributes = [])
+    public static function persistentVolumeClaim(?KubernetesCluster $cluster = null, array $attributes = []): K8sPersistentVolumeClaim
     {
         return new K8sPersistentVolumeClaim($cluster, $attributes);
     }
@@ -153,11 +154,11 @@ trait InitializesResources
     /**
      * Create a new Pod kind.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param KubernetesCluster|null $cluster
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Kinds\K8sPod
      */
-    public static function pod($cluster = null, array $attributes = [])
+    public static function pod(?KubernetesCluster $cluster = null, array $attributes = []): K8sPod
     {
         return new K8sPod($cluster, $attributes);
     }
@@ -165,11 +166,11 @@ trait InitializesResources
     /**
      * Create a new StatefulSet kind.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param KubernetesCluster|null $cluster
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Kinds\K8sStatefulSet
      */
-    public static function statefulSet($cluster = null, array $attributes = [])
+    public static function statefulSet(?KubernetesCluster $cluster = null, array $attributes = []): K8sStatefulSet
     {
         return new K8sStatefulSet($cluster, $attributes);
     }
@@ -177,11 +178,11 @@ trait InitializesResources
     /**
      * Create a new Deployment kind.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param KubernetesCluster|null $cluster
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Kinds\K8sDeployment
      */
-    public static function deployment($cluster = null, array $attributes = [])
+    public static function deployment(?KubernetesCluster $cluster = null, array $attributes = []): K8sDeployment
     {
         return new K8sDeployment($cluster, $attributes);
     }
@@ -189,11 +190,11 @@ trait InitializesResources
     /**
      * Create a new Job kind.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param KubernetesCluster|null $cluster
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Kinds\K8sJob
      */
-    public static function job($cluster = null, array $attributes = [])
+    public static function job(?KubernetesCluster $cluster = null, array $attributes = []): K8sJob
     {
         return new K8sJob($cluster, $attributes);
     }
@@ -201,11 +202,11 @@ trait InitializesResources
     /**
      * Create a new CronJob kind.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param KubernetesCluster|null $cluster
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Kinds\K8sCronJob
      */
-    public static function cronjob($cluster = null, array $attributes = [])
+    public static function cronjob(?KubernetesCluster $cluster = null, array $attributes = []): K8sCronJob
     {
         return new K8sCronJob($cluster, $attributes);
     }
@@ -213,11 +214,11 @@ trait InitializesResources
     /**
      * Create a new DaemonSet kind.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param KubernetesCluster|null $cluster
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Kinds\K8sDaemonSet
      */
-    public static function daemonSet($cluster = null, array $attributes = [])
+    public static function daemonSet(?KubernetesCluster $cluster = null, array $attributes = []): K8sDaemonSet
     {
         return new K8sDaemonSet($cluster, $attributes);
     }
@@ -225,11 +226,11 @@ trait InitializesResources
     /**
      * Create a new HorizontalPodAutoscaler kind.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param KubernetesCluster|null $cluster
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Kinds\K8sHorizontalPodAutoscaler
      */
-    public static function horizontalPodAutoscaler($cluster = null, array $attributes = [])
+    public static function horizontalPodAutoscaler(?KubernetesCluster $cluster = null, array $attributes = []): K8sHorizontalPodAutoscaler
     {
         return new K8sHorizontalPodAutoscaler($cluster, $attributes);
     }
@@ -237,11 +238,11 @@ trait InitializesResources
     /**
      * Create a new ServiceAccount kind.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param KubernetesCluster|null $cluster
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Kinds\K8sServiceAccount
      */
-    public static function serviceAccount($cluster = null, array $attributes = [])
+    public static function serviceAccount(?KubernetesCluster $cluster = null, array $attributes = []): K8sServiceAccount
     {
         return new K8sServiceAccount($cluster, $attributes);
     }
@@ -249,11 +250,11 @@ trait InitializesResources
     /**
      * Create a new Role kind.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param KubernetesCluster|null $cluster
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Kinds\K8sRole
      */
-    public static function role($cluster = null, array $attributes = [])
+    public static function role(?KubernetesCluster $cluster = null, array $attributes = []): K8sRole
     {
         return new K8sRole($cluster, $attributes);
     }
@@ -261,11 +262,11 @@ trait InitializesResources
     /**
      * Create a new ClusterRole kind.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param KubernetesCluster|null $cluster
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Kinds\K8sClusterRole
      */
-    public static function clusterRole($cluster = null, array $attributes = [])
+    public static function clusterRole(?KubernetesCluster $cluster = null, array $attributes = []): K8sClusterRole
     {
         return new K8sClusterRole($cluster, $attributes);
     }
@@ -273,11 +274,11 @@ trait InitializesResources
     /**
      * Create a new RoleBinding kind.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param KubernetesCluster|null $cluster
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Kinds\K8sRoleBinding
      */
-    public static function roleBinding($cluster = null, array $attributes = [])
+    public static function roleBinding(?KubernetesCluster $cluster = null, array $attributes = []): K8sRoleBinding
     {
         return new K8sRoleBinding($cluster, $attributes);
     }
@@ -285,11 +286,11 @@ trait InitializesResources
     /**
      * Create a new ClusterRoleBinding kind.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param KubernetesCluster|null $cluster
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Kinds\K8sClusterRoleBinding
      */
-    public static function clusterRoleBinding($cluster = null, array $attributes = [])
+    public static function clusterRoleBinding(?KubernetesCluster $cluster = null, array $attributes = []): K8sClusterRoleBinding
     {
         return new K8sClusterRoleBinding($cluster, $attributes);
     }
@@ -297,11 +298,11 @@ trait InitializesResources
     /**
      * Create a new PodDisruptionBudget kind.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param KubernetesCluster|null $cluster
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Kinds\K8sPodDisruptionBudget
      */
-    public static function podDisruptionBudget($cluster = null, array $attributes = [])
+    public static function podDisruptionBudget(?KubernetesCluster $cluster = null, array $attributes = []): K8sPodDisruptionBudget
     {
         return new K8sPodDisruptionBudget($cluster, $attributes);
     }
@@ -309,11 +310,11 @@ trait InitializesResources
     /**
      * Create a new ValidatingWebhookConfiguration kind.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param KubernetesCluster|null $cluster
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Kinds\K8sValidatingWebhookConfiguration
      */
-    public static function validatingWebhookConfiguration($cluster = null, array $attributes = [])
+    public static function validatingWebhookConfiguration(?KubernetesCluster $cluster = null, array $attributes = []): K8sValidatingWebhookConfiguration
     {
         return new K8sValidatingWebhookConfiguration($cluster, $attributes);
     }
@@ -321,11 +322,11 @@ trait InitializesResources
     /**
      * Create a new MutatingWebhookConfiguration kind.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param KubernetesCluster|null $cluster
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Kinds\K8sMutatingWebhookConfiguration
      */
-    public static function mutatingWebhookConfiguration($cluster = null, array $attributes = [])
+    public static function mutatingWebhookConfiguration(?KubernetesCluster $cluster = null, array $attributes = []): K8sMutatingWebhookConfiguration
     {
         return new K8sMutatingWebhookConfiguration($cluster, $attributes);
     }

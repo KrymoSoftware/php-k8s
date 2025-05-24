@@ -10,7 +10,7 @@ class Webhook extends Instance
      * @param  array  $rule
      * @return $this
      */
-    public function addRule(array $rule)
+    public function addRule(array $rule): self
     {
         return $this->addToAttribute('rules', $rule);
     }
@@ -21,7 +21,7 @@ class Webhook extends Instance
      * @param  array  $rules
      * @return $this
      */
-    public function addRules(array $rules)
+    public function addRules(array $rules): self
     {
         foreach ($rules as $rule) {
             $this->addRule($rule);

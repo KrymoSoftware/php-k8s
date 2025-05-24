@@ -13,14 +13,14 @@ trait HasNamespace
      *
      * @var bool
      */
-    protected static $namespaceable = false;
+    protected static bool $namespaceable = false;
 
     /**
      * The default namespace for the resource.
      *
      * @var string
      */
-    public static $defaultNamespace = 'default';
+    public static string $defaultNamespace = 'default';
 
     /**
      * Overwrite, at runtime, the default namespace for the resource.
@@ -28,7 +28,7 @@ trait HasNamespace
      * @param  string  $version
      * @return void
      */
-    public static function setDefaultNamespace(string $namespace)
+    public static function setDefaultNamespace(string $namespace): void
     {
         static::$defaultNamespace = $namespace;
     }
@@ -36,10 +36,10 @@ trait HasNamespace
     /**
      * Set the namespace of the resource.
      *
-     * @param  \RenokiCo\PhpK8s\Kinds\K8sNamespace|string  $namespace
+     * @param string|\RenokiCo\PhpK8s\Kinds\K8sNamespace $namespace
      * @return $this
      */
-    public function setNamespace($namespace)
+    public function setNamespace(string|K8sNamespace $namespace): self
     {
         if (! static::$namespaceable) {
             return $this;
@@ -57,10 +57,10 @@ trait HasNamespace
     /**
      * Alias for ->setNamespace().
      *
-     * @param  \RenokiCo\PhpK8s\Kinds\K8sNamespace|string  $namespace
+     * @param string|\RenokiCo\PhpK8s\Kinds\K8sNamespace $namespace
      * @return $this
      */
-    public function whereNamespace($namespace)
+    public function whereNamespace(string|K8sNamespace $namespace): self
     {
         return $this->setNamespace($namespace);
     }
@@ -70,7 +70,7 @@ trait HasNamespace
      *
      * @return string
      */
-    public function getNamespace()
+    public function getNamespace(): string
     {
         return $this->getAttribute('metadata.namespace', static::$defaultNamespace);
     }

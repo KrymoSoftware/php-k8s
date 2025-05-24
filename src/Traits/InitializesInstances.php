@@ -21,7 +21,7 @@ trait InitializesInstances
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Instances\Container
      */
-    public static function container(array $attributes = [])
+    public static function container(array $attributes = []): Container
     {
         return new Container($attributes);
     }
@@ -32,7 +32,7 @@ trait InitializesInstances
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Instances\Probe
      */
-    public static function probe(array $attributes = [])
+    public static function probe(array $attributes = []): Probe
     {
         return new Probe($attributes);
     }
@@ -43,7 +43,7 @@ trait InitializesInstances
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Instances\ResourceMetric
      */
-    public static function metric(array $attributes = [])
+    public static function metric(array $attributes = []): ResourceMetric
     {
         return new ResourceMetric($attributes);
     }
@@ -54,7 +54,7 @@ trait InitializesInstances
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Instances\ResourceObject
      */
-    public static function object(array $attributes = [])
+    public static function object(array $attributes = []): ResourceObject
     {
         return new ResourceObject($attributes);
     }
@@ -65,7 +65,7 @@ trait InitializesInstances
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Instances\Rule
      */
-    public static function rule(array $attributes = [])
+    public static function rule(array $attributes = []): Rule
     {
         return new Rule($attributes);
     }
@@ -76,7 +76,7 @@ trait InitializesInstances
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Instances\Subject
      */
-    public static function subject(array $attributes = [])
+    public static function subject(array $attributes = []): Subject
     {
         return new Subject($attributes);
     }
@@ -87,7 +87,7 @@ trait InitializesInstances
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Instances\Volume
      */
-    public static function volume(array $attributes = [])
+    public static function volume(array $attributes = []): Volume
     {
         return new Volume($attributes);
     }
@@ -98,7 +98,7 @@ trait InitializesInstances
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Instances\Affinity
      */
-    public static function affinity(array $attributes = [])
+    public static function affinity(array $attributes = []): Affinity
     {
         return new Affinity($attributes);
     }
@@ -109,7 +109,7 @@ trait InitializesInstances
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Instances\Expression
      */
-    public static function expression(array $attributes = [])
+    public static function expression(array $attributes = []): Expression
     {
         return new Expression($attributes);
     }
@@ -120,7 +120,7 @@ trait InitializesInstances
      * @param  array  $attributes
      * @return \RenokiCo\PhpK8s\Instances\Webhook
      */
-    public static function webhook(array $attributes = [])
+    public static function webhook(array $attributes = []): Webhook
     {
         return new Webhook($attributes);
     }

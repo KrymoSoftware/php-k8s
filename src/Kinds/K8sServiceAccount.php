@@ -12,22 +12,22 @@ class K8sServiceAccount extends K8sResource implements InteractsWithK8sCluster, 
      *
      * @var null|string
      */
-    protected static $kind = 'ServiceAccount';
+    protected static ?string $kind = 'ServiceAccount';
 
     /**
      * Wether the resource has a namespace.
      *
      * @var bool
      */
-    protected static $namespaceable = true;
+    protected static bool $namespaceable = true;
 
     /**
      * Attach a new secret to the secrets list.
      *
-     * @param  \RenokiCo\PhpK8s\Kinds\K8sSecret|string  $secret
+     * @param string|\RenokiCo\PhpK8s\Kinds\K8sSecret $secret
      * @return $this
      */
-    public function addSecret($secret)
+    public function addSecret(string|K8sSecret $secret): self
     {
         if ($secret instanceof K8sSecret) {
             $secret = $secret->getName();
@@ -42,7 +42,7 @@ class K8sServiceAccount extends K8sResource implements InteractsWithK8sCluster, 
      * @param  array  $secrets
      * @return $this
      */
-    public function addSecrets(array $secrets)
+    public function addSecrets(array $secrets): self
     {
         foreach ($secrets as $secret) {
             $this->addSecret($secret);
@@ -57,7 +57,7 @@ class K8sServiceAccount extends K8sResource implements InteractsWithK8sCluster, 
      * @param  array  $secrets
      * @return $this
      */
-    public function setSecrets(array $secrets)
+    public function setSecrets(array $secrets): self
     {
         foreach ($secrets as &$secret) {
             if ($secret instanceof K8sSecret) {
@@ -74,7 +74,7 @@ class K8sServiceAccount extends K8sResource implements InteractsWithK8sCluster, 
      * @param  string  $name
      * @return $this
      */
-    public function addPulledSecret(string $name)
+    public function addPulledSecret(string $name): self
     {
         return $this->addToAttribute('imagePullSecrets', ['name' => $name]);
     }
@@ -85,7 +85,7 @@ class K8sServiceAccount extends K8sResource implements InteractsWithK8sCluster, 
      * @param  array  $names
      * @return $this
      */
-    public function addPulledSecrets(array $names)
+    public function addPulledSecrets(array $names): self
     {
         foreach ($names as $name) {
             $this->addPulledSecret($name);

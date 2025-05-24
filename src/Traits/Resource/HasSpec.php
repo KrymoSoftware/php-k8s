@@ -11,7 +11,7 @@ trait HasSpec
      * @param  mixed  $value
      * @return $this
      */
-    public function setSpec(string $name, $value)
+    public function setSpec(string $name, mixed $value): self
     {
         return $this->setAttribute("spec.{$name}", $value);
     }
@@ -23,7 +23,7 @@ trait HasSpec
      * @param  mixed  $value
      * @return $this
      */
-    public function addToSpec(string $name, $value)
+    public function addToSpec(string $name, mixed $value): self
     {
         return $this->addToAttribute("spec.{$name}", $value);
     }
@@ -32,10 +32,10 @@ trait HasSpec
      * Get the spec parameter with default.
      *
      * @param  string  $name
-     * @param  mixed  $default
+     * @param mixed|null $default
      * @return mixed
      */
-    public function getSpec(string $name, $default = null)
+    public function getSpec(string $name, mixed $default = null): mixed
     {
         return $this->getAttribute("spec.{$name}", $default);
     }
@@ -46,7 +46,7 @@ trait HasSpec
      * @param  string  $name
      * @return mixed
      */
-    public function removeSpec(string $name)
+    public function removeSpec(string $name): mixed
     {
         return $this->removeAttribute("spec.{$name}");
     }

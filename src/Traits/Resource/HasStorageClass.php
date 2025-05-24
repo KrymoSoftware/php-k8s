@@ -9,10 +9,10 @@ trait HasStorageClass
     /**
      * Set the storageClassName parameter.
      *
-     * @param  \RenokiCo\PhpK8s\Kinds\K8sStorageClass|string  $storageClass
+     * @param \RenokiCo\PhpK8s\Kinds\K8sStorageClass|string $storageClass
      * @return $this
      */
-    public function setStorageClass($storageClass)
+    public function setStorageClass(K8sStorageClass|string $storageClass): self
     {
         if ($storageClass instanceof K8sStorageClass) {
             $storageClass = $storageClass->getName();
@@ -26,7 +26,7 @@ trait HasStorageClass
      *
      * @return string|null
      */
-    public function getStorageClass()
+    public function getStorageClass(): ?string
     {
         return $this->getSpec('storageClassName', null);
     }

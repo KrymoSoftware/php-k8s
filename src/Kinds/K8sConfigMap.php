@@ -15,14 +15,14 @@ class K8sConfigMap extends K8sResource implements InteractsWithK8sCluster, Watch
      *
      * @var null|string
      */
-    protected static $kind = 'ConfigMap';
+    protected static ?string $kind = 'ConfigMap';
 
     /**
      * Wether the resource has a namespace.
      *
      * @var bool
      */
-    protected static $namespaceable = true;
+    protected static bool $namespaceable = true;
 
     /**
      * Get the data attribute.
@@ -30,7 +30,7 @@ class K8sConfigMap extends K8sResource implements InteractsWithK8sCluster, Watch
      * @param  string|null  $name
      * @return mixed
      */
-    public function getData(string $name = null)
+    public function getData(?string $name = null): mixed
     {
         if ($name) {
             return $this->getAttribute("data.{$name}", '');
@@ -45,7 +45,7 @@ class K8sConfigMap extends K8sResource implements InteractsWithK8sCluster, Watch
      * @param  array  $data
      * @return $this
      */
-    public function setData(array $data)
+    public function setData(array $data): self
     {
         return $this->setAttribute('data', $data);
     }
@@ -57,7 +57,7 @@ class K8sConfigMap extends K8sResource implements InteractsWithK8sCluster, Watch
      * @param  mixed  $value
      * @return $this
      */
-    public function addData(string $name, $value)
+    public function addData(string $name, mixed $value): self
     {
         return $this->setAttribute("data.{$name}", $value);
     }
@@ -68,7 +68,7 @@ class K8sConfigMap extends K8sResource implements InteractsWithK8sCluster, Watch
      * @param  string  $name
      * @return $this
      */
-    public function removeData(string $name)
+    public function removeData(string $name): self
     {
         return $this->removeAttribute("data.{$name}");
     }

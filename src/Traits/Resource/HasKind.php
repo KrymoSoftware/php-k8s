@@ -9,14 +9,14 @@ trait HasKind
      *
      * @var null|string
      */
-    protected static $kind = null;
+    protected static ?string $kind = null;
 
     /**
      * Get the resource kind.
      *
      * @return string|null
      */
-    public static function getKind()
+    public static function getKind(): ?string
     {
         return static::$kind;
     }

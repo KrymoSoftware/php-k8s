@@ -12,14 +12,14 @@ class K8sEvent extends K8sResource implements InteractsWithK8sCluster, Watchable
      *
      * @var null|string
      */
-    protected static $kind = 'Event';
+    protected static ?string $kind = 'Event';
 
     /**
      * Wether the resource has a namespace.
      *
      * @var bool
      */
-    protected static $namespaceable = true;
+    protected static bool $namespaceable = true;
 
     /**
      * Attach the given resource to the event.
@@ -27,7 +27,7 @@ class K8sEvent extends K8sResource implements InteractsWithK8sCluster, Watchable
      * @param  \RenokiCo\PhpK8s\Kinds\K8sResource  $resource
      * @return $this
      */
-    public function setResource(K8sResource $resource)
+    public function setResource(K8sResource $resource): self
     {
         $object = [
             'apiVersion' => $resource->getApiVersion(),
@@ -51,7 +51,7 @@ class K8sEvent extends K8sResource implements InteractsWithK8sCluster, Watchable
      *
      * @throws \RenokiCo\PhpK8s\Exceptions\KubernetesAPIException
      */
-    public function emitOrUpdate(array $query = ['pretty' => 1])
+    public function emitOrUpdate(array $query = ['pretty' => 1]): K8sResource
     {
         return $this->createOrUpdate($query);
     }

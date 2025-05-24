@@ -21,11 +21,11 @@ class K8s
     /**
      * Load Kind configuration from an YAML text.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param \RenokiCo\PhpK8s\KubernetesCluster|null $cluster
      * @param  string  $yaml
      * @return \RenokiCo\PhpK8s\Kinds\K8sResource|array[\RenokiCo\PhpK8s\Kinds\K8sResource]
      */
-    public static function fromYaml($cluster, string $yaml)
+    public static function fromYaml(?KubernetesCluster $cluster, string $yaml): array|K8sResource
     {
         $instances = collect(yaml_parse($yaml, -1))->reduce(function ($classes, $yaml) use ($cluster) {
             $kind = $yaml['kind'];
@@ -52,12 +52,12 @@ class K8s
     /**
      * Load Kind configuration from an YAML file.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param \RenokiCo\PhpK8s\KubernetesCluster|null $cluster
      * @param  string  $path
      * @param  Closure|null  $callback
      * @return \RenokiCo\PhpK8s\Kinds\K8sResource|array[\RenokiCo\PhpK8s\Kinds\K8sResource]
      */
-    public static function fromYamlFile($cluster, string $path, Closure $callback = null)
+    public static function fromYamlFile(?KubernetesCluster $cluster, string $path, ?Closure $callback = null): array|K8sResource
     {
         $content = file_get_contents($path);
 
@@ -73,13 +73,13 @@ class K8s
      * replace all variables in curly braces with the values from
      * the given array.
      *
-     * @param  \RenokiCo\PhpK8s\KubernetesCluster|null  $cluster
+     * @param \RenokiCo\PhpK8s\KubernetesCluster|null $cluster
      * @param  string  $path
      * @param  array  $replace
      * @param  \Closure|null  $callback
      * @return \RenokiCo\PhpK8s\Kinds\K8sResource|array[\RenokiCo\PhpK8s\Kinds\K8sResource]
      */
-    public static function fromTemplatedYamlFile($cluster, string $path, array $replace, Closure $callback = null)
+    public static function fromTemplatedYamlFile(?KubernetesCluster $cluster, string $path, array $replace, ?Closure $callback = null): array|K8sResource
     {
         return static::fromYamlFile($cluster, $path, function ($content) use ($replace, $callback) {
             foreach ($replace as $search => $replacement) {
@@ -97,7 +97,7 @@ class K8s
      * @param  string|null  $name
      * @return void
      */
-    public static function registerCrd(string $class, string $name = null): void
+    public static function registerCrd(string $class, ?string $name = null): void
     {
         static::macro(
             Str::camel($name ?: substr($class, strrpos($class, '\\') + 1)),

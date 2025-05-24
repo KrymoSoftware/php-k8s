@@ -11,7 +11,7 @@ class Container extends Instance
      * @param  string  $tag
      * @return $this
      */
-    public function setImage(string $image, string $tag = 'latest')
+    public function setImage(string $image, string $tag = 'latest'): self
     {
         return $this->setAttribute('image', $image.':'.$tag);
     }
@@ -24,7 +24,7 @@ class Container extends Instance
      * @param  string  $name
      * @return $this
      */
-    public function addPort(int $containerPort, string $protocol = 'TCP', string $name = null)
+    public function addPort(int $containerPort, string $protocol = 'TCP', ?string $name = null): self
     {
         return $this->addToAttribute('ports', [
             'name' => $name,
@@ -36,10 +36,10 @@ class Container extends Instance
     /**
      * Add a volume mount.
      *
-     * @param  array|\RenokiCo\PhpK8s\Instances\MountedVolume  $volume
+     * @param \RenokiCo\PhpK8s\Instances\MountedVolume|array $volume
      * @return $this
      */
-    public function addMountedVolume($volume)
+    public function addMountedVolume(MountedVolume|array $volume): self
     {
         if ($volume instanceof MountedVolume) {
             $volume = $volume->toArray();
@@ -54,7 +54,7 @@ class Container extends Instance
      * @param  array  $volumes
      * @return $this
      */
-    public function addMountedVolumes(array $volumes)
+    public function addMountedVolumes(array $volumes): self
     {
         foreach ($volumes as $volume) {
             $this->addMountedVolume($volume);
@@ -69,7 +69,7 @@ class Container extends Instance
      * @param  array  $volumes
      * @return $this
      */
-    public function setMountedVolumes(array $volumes)
+    public function setMountedVolumes(array $volumes): self
     {
         foreach ($volumes as &$volume) {
             if ($volume instanceof MountedVolume) {
@@ -86,7 +86,7 @@ class Container extends Instance
      * @param  bool  $asInstance
      * @return array
      */
-    public function getMountedVolumes(bool $asInstance = true)
+    public function getMountedVolumes(bool $asInstance = true): array
     {
         $mountedVolumes = $this->getAttribute('volumeMounts', []);
 
@@ -107,7 +107,7 @@ class Container extends Instance
      * @param  string  $key
      * @return $this
      */
-    public function addSecretKeyRef(string $name, string $secretName, string $key)
+    public function addSecretKeyRef(string $name, string $secretName, string $key): self
     {
         return $this->addEnv($name, [
             'valueFrom' => [
@@ -125,7 +125,7 @@ class Container extends Instance
      * @param  array  $envsWithRefs
      * @return $this
      */
-    public function addSecretKeyRefs(array $envsWithRefs)
+    public function addSecretKeyRefs(array $envsWithRefs): self
     {
         foreach ($envsWithRefs as $envName => $refs) {
             $this->addSecretKeyRef($envName, ...$refs);
@@ -142,7 +142,7 @@ class Container extends Instance
      * @param  string  $key
      * @return $this
      */
-    public function addConfigMapRef(string $name, string $cmName, string $key)
+    public function addConfigMapRef(string $name, string $cmName, string $key): self
     {
         return $this->addEnv($name, [
             'valueFrom' => [
@@ -160,7 +160,7 @@ class Container extends Instance
      * @param  array  $envsWithRefs
      * @return $this
      */
-    public function addConfigMapRefs(array $envsWithRefs)
+    public function addConfigMapRefs(array $envsWithRefs): self
     {
         foreach ($envsWithRefs as $envName => $refs) {
             $this->addConfigMapRef($envName, ...$refs);
@@ -177,7 +177,7 @@ class Container extends Instance
      * @param  string  $key
      * @return $this
      */
-    public function addFieldRef(string $name, string $fieldPath)
+    public function addFieldRef(string $name, string $fieldPath): self
     {
         return $this->addEnv($name, [
             'valueFrom' => [
@@ -194,7 +194,7 @@ class Container extends Instance
      * @param  array  $envsWithRefs
      * @return $this
      */
-    public function addFieldRefs(array $envsWithRefs)
+    public function addFieldRefs(array $envsWithRefs): self
     {
         foreach ($envsWithRefs as $envName => $refs) {
             $this->addFieldRef($envName, ...$refs);
@@ -210,7 +210,7 @@ class Container extends Instance
      * @param  mixed  $value
      * @return $this
      */
-    public function addEnv(string $name, $value)
+    public function addEnv(string $name, mixed $value): self
     {
         // If a valuFrom is encountered, add it under valueFrom instead.
         if (is_array($value) && array_key_exists('valueFrom', $value)) {
@@ -226,7 +226,7 @@ class Container extends Instance
      * @param  array  $envs
      * @return $this
      */
-    public function addEnvs(array $envs)
+    public function addEnvs(array $envs): self
     {
         foreach ($envs as $name => $value) {
             $this->addEnv($name, $value);
@@ -241,7 +241,7 @@ class Container extends Instance
      * @param  array  $envs
      * @return $this
      */
-    public function setEnv(array $envs)
+    public function setEnv(array $envs): self
     {
         $envs = collect($envs)->map(function ($value, $name) {
             // If a valuFrom is encountered, add it under valueFrom instead.
@@ -262,7 +262,7 @@ class Container extends Instance
      * @param  string  $measure
      * @return $this
      */
-    public function minMemory(int $size, string $measure = 'Gi')
+    public function minMemory(int $size, string $measure = 'Gi'): self
     {
         return $this->setAttribute('resources.requests.memory', $size.$measure);
     }
@@ -272,7 +272,7 @@ class Container extends Instance
      *
      * @return string|null
      */
-    public function getMinMemory()
+    public function getMinMemory(): ?string
     {
         return $this->getAttribute('resources.requests.memory', null);
     }
@@ -283,7 +283,7 @@ class Container extends Instance
      * @param  string  $size
      * @return $this
      */
-    public function minCpu(string $size)
+    public function minCpu(string $size): self
     {
         return $this->setAttribute('resources.requests.cpu', $size);
     }
@@ -293,7 +293,7 @@ class Container extends Instance
      *
      * @return string|null
      */
-    public function getMinCpu()
+    public function getMinCpu(): ?string
     {
         return $this->getAttribute('resources.requests.cpu', null);
     }
@@ -305,7 +305,7 @@ class Container extends Instance
      * @param  string  $measure
      * @return $this
      */
-    public function maxMemory(int $size, string $measure = 'Gi')
+    public function maxMemory(int $size, string $measure = 'Gi'): self
     {
         return $this->setAttribute('resources.limits.memory', $size.$measure);
     }
@@ -315,7 +315,7 @@ class Container extends Instance
      *
      * @return string|null
      */
-    public function getMaxMemory()
+    public function getMaxMemory(): ?string
     {
         return $this->getAttribute('resources.limits.memory', null);
     }
@@ -326,7 +326,7 @@ class Container extends Instance
      * @param  string  $size
      * @return $this
      */
-    public function maxCpu(string $size)
+    public function maxCpu(string $size): self
     {
         return $this->setAttribute('resources.limits.cpu', $size);
     }
@@ -336,7 +336,7 @@ class Container extends Instance
      *
      * @return string|null
      */
-    public function getMaxCpu()
+    public function getMaxCpu(): ?string
     {
         return $this->getAttribute('resources.limits.cpu', null);
     }
@@ -347,7 +347,7 @@ class Container extends Instance
      * @param  \RenokiCo\PhpK8s\Instances\Probe  $probe
      * @return $this
      */
-    public function setReadinessProbe(Probe $probe)
+    public function setReadinessProbe(Probe $probe): self
     {
         return $this->setAttribute('readinessProbe', $probe->toArray());
     }
@@ -358,12 +358,12 @@ class Container extends Instance
      * @param  bool  $asInstance
      * @return null|array|\RenokiCo\PhpK8s\Instances\Probe
      */
-    public function getReadinessProbe(bool $asInstance = true)
+    public function getReadinessProbe(bool $asInstance = true): array|Probe|null
     {
         $probe = $this->getAttribute('readinessProbe', null);
 
         if (! $probe) {
-            return;
+            return null;
         }
 
         return $asInstance ? new Probe($probe) : $probe;
@@ -375,7 +375,7 @@ class Container extends Instance
      * @param  \RenokiCo\PhpK8s\Instances\Probe  $probe
      * @return $this
      */
-    public function setLivenessProbe(Probe $probe)
+    public function setLivenessProbe(Probe $probe): self
     {
         return $this->setAttribute('livenessProbe', $probe->toArray());
     }
@@ -386,12 +386,12 @@ class Container extends Instance
      * @param  bool  $asInstance
      * @return null|array|\RenokiCo\PhpK8s\Instances\Probe
      */
-    public function getLivenessProbe(bool $asInstance = true)
+    public function getLivenessProbe(bool $asInstance = true): array|Probe|null
     {
         $probe = $this->getAttribute('livenessProbe', null);
 
         if (! $probe) {
-            return;
+            return null;
         }
 
         return $asInstance ? new Probe($probe) : $probe;
@@ -403,7 +403,7 @@ class Container extends Instance
      * @param  \RenokiCo\PhpK8s\Instances\Probe  $probe
      * @return $this
      */
-    public function setStartupProbe(Probe $probe)
+    public function setStartupProbe(Probe $probe): self
     {
         return $this->setAttribute('startupProbe', $probe->toArray());
     }
@@ -414,12 +414,12 @@ class Container extends Instance
      * @param  bool  $asInstance
      * @return null|array|\RenokiCo\PhpK8s\Instances\Probe
      */
-    public function getStartupProbe(bool $asInstance = true)
+    public function getStartupProbe(bool $asInstance = true): array|Probe|null
     {
         $probe = $this->getAttribute('startupProbe', null);
 
         if (! $probe) {
-            return;
+            return null;
         }
 
         return $asInstance ? new Probe($probe) : $probe;

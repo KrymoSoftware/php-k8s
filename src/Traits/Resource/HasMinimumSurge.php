@@ -12,7 +12,7 @@ trait HasMinimumSurge
      * @param  int  $seconds
      * @return $this
      */
-    public function setMinReadySeconds(int $seconds)
+    public function setMinReadySeconds(int $seconds): self
     {
         return $this->setSpec('minReadySeconds', $seconds);
     }

@@ -14,7 +14,7 @@ class Volume extends Instance
      * @param  string  $name
      * @return $this
      */
-    public function emptyDirectory(string $name)
+    public function emptyDirectory(string $name): self
     {
         return $this->setAttribute('name', $name)
             ->setAttribute('emptyDir', (object) new stdClass);
@@ -26,7 +26,7 @@ class Volume extends Instance
      * @param  \RenokiCo\PhpK8s\Kinds\K8sConfigMap  $configmap
      * @return $this
      */
-    public function fromConfigMap(K8sConfigMap $configmap)
+    public function fromConfigMap(K8sConfigMap $configmap): self
     {
         return $this->setAttribute('name', "{$configmap->getName()}-volume")
             ->setAttribute('configMap', ['name' => $configmap->getName()]);
@@ -38,7 +38,7 @@ class Volume extends Instance
      * @param  \RenokiCo\PhpK8s\Kinds\K8sSecret  $secret
      * @return $this
      */
-    public function fromSecret(K8sSecret $secret)
+    public function fromSecret(K8sSecret $secret): self
     {
         return $this->setAttribute('name', "{$secret->getName()}-secret-volume")
             ->setAttribute('secret', ['secretName' => $secret->getName()]);
@@ -51,7 +51,7 @@ class Volume extends Instance
      * @param  string  $fsType
      * @return $this
      */
-    public function gcePersistentDisk(string $diskName, string $fsType = 'ext4')
+    public function gcePersistentDisk(string $diskName, string $fsType = 'ext4'): self
     {
         return $this->setAttribute('name', "{$diskName}-volume")
             ->setAttribute('gcePersistentDisk', ['pdName' => $diskName, 'fsType' => $fsType]);
@@ -64,7 +64,7 @@ class Volume extends Instance
      * @param  string  $fsType
      * @return $this
      */
-    public function awsEbs(string $volumeId, string $fsType = 'ext4')
+    public function awsEbs(string $volumeId, string $fsType = 'ext4'): self
     {
         return $this->setAttribute('name', "{$volumeId}-volume")
             ->setAttribute('awsElasticBlockStore', ['volumeID' => $volumeId, 'fsType' => $fsType]);
@@ -77,7 +77,7 @@ class Volume extends Instance
      * @param  string|null  $subPath
      * @return \RenokiCo\PhpK8s\Instances\MountedVolume
      */
-    public function mountTo(string $mountPath, string $subPath = null)
+    public function mountTo(string $mountPath, ?string $subPath = null): MountedVolume
     {
         return MountedVolume::from($this)->mountTo($mountPath, $subPath);
     }

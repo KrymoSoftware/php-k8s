@@ -13,7 +13,7 @@ trait ChecksClusterVersion
      *
      * @var \vierbergenlars\SemVer\version|null
      */
-    protected $kubernetesVersion;
+    protected ?Semver $kubernetesVersion;
 
     /**
      * Load the cluster version.
@@ -51,8 +51,9 @@ trait ChecksClusterVersion
      * Check if the cluster version is newer
      * than a specific version.
      *
-     * @param  string  $kubernetesVersion
+     * @param string $kubernetesVersion
      * @return bool
+     * @throws KubernetesAPIException
      */
     public function newerThan(string $kubernetesVersion): bool
     {
@@ -67,8 +68,9 @@ trait ChecksClusterVersion
      * Check if the cluster version is older
      * than a specific version.
      *
-     * @param  string  $kubernetesVersion
+     * @param string $kubernetesVersion
      * @return bool
+     * @throws KubernetesAPIException
      */
     public function olderThan(string $kubernetesVersion): bool
     {

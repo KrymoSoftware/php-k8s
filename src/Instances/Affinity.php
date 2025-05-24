@@ -12,7 +12,7 @@ class Affinity extends Instance
      * @param  int  $weight
      * @return $this
      */
-    public function addPreference(array $expressions, array $fieldsExpressions, int $weight = 1)
+    public function addPreference(array $expressions, array $fieldsExpressions, int $weight = 1): self
     {
         foreach ($expressions as &$expression) {
             if ($expression instanceof Expression) {
@@ -48,7 +48,7 @@ class Affinity extends Instance
      * @param  int  $weight
      * @return $this
      */
-    public function addNodeSelectorPreference(array $expressions, array $fieldsExpressions, int $weight = 1)
+    public function addNodeSelectorPreference(array $expressions, array $fieldsExpressions, int $weight = 1): self
     {
         foreach ($expressions as &$expression) {
             if ($expression instanceof Expression) {
@@ -83,7 +83,7 @@ class Affinity extends Instance
      * @param  array  $fieldsExpressions
      * @return $this
      */
-    public function addNodeRequirement(array $expressions, array $fieldsExpressions)
+    public function addNodeRequirement(array $expressions, array $fieldsExpressions): self
     {
         foreach ($expressions as &$expression) {
             if ($expression instanceof Expression) {
@@ -116,7 +116,7 @@ class Affinity extends Instance
      * @param  string  $topologyKey
      * @return $this
      */
-    public function addLabelSelectorRequirement(array $expressions, array $fieldsExpressions, string $topologyKey)
+    public function addLabelSelectorRequirement(array $expressions, array $fieldsExpressions, string $topologyKey): self
     {
         foreach ($expressions as &$expression) {
             if ($expression instanceof Expression) {

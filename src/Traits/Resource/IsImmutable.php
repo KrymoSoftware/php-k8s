@@ -9,7 +9,7 @@ trait IsImmutable
      *
      * @return $this
      */
-    public function immutable()
+    public function immutable(): self
     {
         return $this->setAttribute('immutable', true);
     }

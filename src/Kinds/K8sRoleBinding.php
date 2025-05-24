@@ -15,21 +15,21 @@ class K8sRoleBinding extends K8sResource implements InteractsWithK8sCluster, Wat
      *
      * @var null|string
      */
-    protected static $kind = 'RoleBinding';
+    protected static ?string $kind = 'RoleBinding';
 
     /**
      * Wether the resource has a namespace.
      *
      * @var bool
      */
-    protected static $namespaceable = true;
+    protected static bool $namespaceable = true;
 
     /**
      * The default version for the resource.
      *
      * @var string
      */
-    protected static $defaultVersion = 'rbac.authorization.k8s.io/v1';
+    protected static string $defaultVersion = 'rbac.authorization.k8s.io/v1';
 
     /**
      * Attach a Role/ClusterRole to the binding.
@@ -38,7 +38,7 @@ class K8sRoleBinding extends K8sResource implements InteractsWithK8sCluster, Wat
      * @param  string  $apiGroup
      * @return $this
      */
-    public function setRole(K8sRole $role, string $apiGroup = 'rbac.authorization.k8s.io')
+    public function setRole(K8sRole $role, string $apiGroup = 'rbac.authorization.k8s.io'): self
     {
         return $this->setAttribute('roleRef', [
             'apiGroup' => $apiGroup,
@@ -52,7 +52,7 @@ class K8sRoleBinding extends K8sResource implements InteractsWithK8sCluster, Wat
      *
      * @return array|null
      */
-    public function getRole()
+    public function getRole(): ?array
     {
         return $this->getAttribute('roleRef');
     }

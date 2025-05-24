@@ -15,14 +15,14 @@ class K8sSecret extends K8sResource implements InteractsWithK8sCluster, Watchabl
      *
      * @var null|string
      */
-    protected static $kind = 'Secret';
+    protected static ?string $kind = 'Secret';
 
     /**
      * Wether the resource has a namespace.
      *
      * @var bool
      */
-    protected static $namespaceable = true;
+    protected static bool $namespaceable = true;
 
     /**
      * Get the data attribute.
@@ -31,7 +31,7 @@ class K8sSecret extends K8sResource implements InteractsWithK8sCluster, Watchabl
      * @param  bool  $decode
      * @return mixed
      */
-    public function getData(bool $decode = false)
+    public function getData(bool $decode = false): mixed
     {
         $data = $this->getAttribute('data', []);
 
@@ -52,7 +52,7 @@ class K8sSecret extends K8sResource implements InteractsWithK8sCluster, Watchabl
      * @param  bool  $encode
      * @return $this
      */
-    public function setData(array $data, bool $encode = true)
+    public function setData(array $data, bool $encode = true): self
     {
         if ($encode) {
             foreach ($data as $key => &$value) {
@@ -68,10 +68,10 @@ class K8sSecret extends K8sResource implements InteractsWithK8sCluster, Watchabl
      *
      * @param  string  $name
      * @param  mixed  $value
-     * @param  bool  $encode
+     * @param bool $encode
      * @return $this
      */
-    public function addData(string $name, $value, $encode = true)
+    public function addData(string $name, mixed $value, bool $encode = true): self
     {
         if ($encode) {
             $value = base64_encode($value);
@@ -86,7 +86,7 @@ class K8sSecret extends K8sResource implements InteractsWithK8sCluster, Watchabl
      * @param  string  $name
      * @return $this
      */
-    public function removeData(string $name)
+    public function removeData(string $name): self
     {
         return $this->removeAttribute("data.{$name}");
     }

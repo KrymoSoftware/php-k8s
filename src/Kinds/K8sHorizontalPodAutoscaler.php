@@ -21,21 +21,21 @@ class K8sHorizontalPodAutoscaler extends K8sResource implements InteractsWithK8s
      *
      * @var null|string
      */
-    protected static $kind = 'HorizontalPodAutoscaler';
+    protected static ?string $kind = 'HorizontalPodAutoscaler';
 
     /**
      * The default version for the resource.
      *
      * @var string
      */
-    protected static $defaultVersion = 'autoscaling/v2';
+    protected static string $defaultVersion = 'autoscaling/v2';
 
     /**
      * Wether the resource has a namespace.
      *
      * @var bool
      */
-    protected static $namespaceable = true;
+    protected static bool $namespaceable = true;
 
     /**
      * Set the reference to the scaling resource.
@@ -43,7 +43,7 @@ class K8sHorizontalPodAutoscaler extends K8sResource implements InteractsWithK8s
      * @param  Scalable  $resource
      * @return $this
      */
-    public function setResource(Scalable $resource)
+    public function setResource(Scalable $resource): self
     {
         return $this->setSpec('scaleTargetRef', [
             'apiVersion' => $resource->getApiVersion(),
@@ -58,7 +58,7 @@ class K8sHorizontalPodAutoscaler extends K8sResource implements InteractsWithK8s
      * @param  ResourceMetric  $metric
      * @return $this
      */
-    public function addMetric(ResourceMetric $metric)
+    public function addMetric(ResourceMetric $metric): self
     {
         return $this->addToSpec('metrics', $metric->toArray());
     }
@@ -69,7 +69,7 @@ class K8sHorizontalPodAutoscaler extends K8sResource implements InteractsWithK8s
      * @param  array  $metrics
      * @return $this
      */
-    public function addMetrics(array $metrics)
+    public function addMetrics(array $metrics): self
     {
         foreach ($metrics as $metric) {
             $this->addMetric($metric);
@@ -84,7 +84,7 @@ class K8sHorizontalPodAutoscaler extends K8sResource implements InteractsWithK8s
      * @param  array  $metrics
      * @return $this
      */
-    public function setMetrics(array $metrics)
+    public function setMetrics(array $metrics): self
     {
         foreach ($metrics as &$metric) {
             if ($metric instanceof ResourceMetric) {
@@ -111,7 +111,7 @@ class K8sHorizontalPodAutoscaler extends K8sResource implements InteractsWithK8s
      * @param  int  $replicas
      * @return $this
      */
-    public function min(int $replicas)
+    public function min(int $replicas): self
     {
         return $this->setSpec('minReplicas', $replicas);
     }
@@ -132,7 +132,7 @@ class K8sHorizontalPodAutoscaler extends K8sResource implements InteractsWithK8s
      * @param  int  $replicas
      * @return $this
      */
-    public function max(int $replicas)
+    public function max(int $replicas): self
     {
         return $this->setSpec('maxReplicas', $replicas);
     }

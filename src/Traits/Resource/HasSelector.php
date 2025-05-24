@@ -10,7 +10,7 @@ trait HasSelector
      * @param  array  $selectors
      * @return $this
      */
-    public function setSelectors(array $selectors = [])
+    public function setSelectors(array $selectors = []): self
     {
         return $this->setSpec('selector', $selectors);
     }

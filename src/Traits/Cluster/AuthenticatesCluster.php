@@ -13,7 +13,7 @@ trait AuthenticatesCluster
      *
      * @var string|null
      */
-    private $token;
+    private ?string $token;
 
     /**
      * The key pair of username & password used
@@ -21,7 +21,7 @@ trait AuthenticatesCluster
      *
      * @var array
      */
-    private $auth = [];
+    private array $auth = [];
 
     /**
      * The path to the Client certificate (if any)
@@ -29,7 +29,7 @@ trait AuthenticatesCluster
      *
      * @var string|null
      */
-    private $cert;
+    private ?string $cert;
 
     /**
      * The path to the Client Key (if any)
@@ -37,7 +37,7 @@ trait AuthenticatesCluster
      *
      * @var string|null
      */
-    private $sslKey;
+    private ?string $sslKey;
 
     /**
      * Wether SSL should be verified. Defaults to true,
@@ -46,7 +46,7 @@ trait AuthenticatesCluster
      *
      * @var string|null|bool
      */
-    private $verify;
+    private string|bool|null $verify;
 
     /**
      * Start the current cluster with URL.
@@ -54,7 +54,7 @@ trait AuthenticatesCluster
      * @param  string  $url
      * @return \RenokiCo\PhpK8s\KubernetesCluster
      */
-    public static function fromUrl(string $url)
+    public static function fromUrl(string $url): \RenokiCo\PhpK8s\KubernetesCluster
     {
         return new static($url);
     }
@@ -65,7 +65,7 @@ trait AuthenticatesCluster
      * @param  string|null  $token
      * @return $this
      */
-    public function withToken(string $token = null)
+    public function withToken(?string $token = null): self
     {
         $this->token = $this->normalize($token);
 
@@ -76,11 +76,11 @@ trait AuthenticatesCluster
      * Load the token from provider command line.
      *
      * @param  string  $cmdPath
-     * @param  string|nll  $cmdArgs
+     * @param  string|null  $cmdArgs
      * @param  string|null  $tokenPath
      * @return $this
      */
-    public function withTokenFromCommandProvider(string $cmdPath, string $cmdArgs = null, string $tokenPath = null)
+    public function withTokenFromCommandProvider(string $cmdPath, ?string $cmdArgs = null, ?string $tokenPath = null): self
     {
         $process = Process::fromShellCommandline("{$cmdPath} {$cmdArgs}");
 
@@ -109,7 +109,7 @@ trait AuthenticatesCluster
      * @param  string|null  $path
      * @return $this
      */
-    public function loadTokenFromFile(string $path = null)
+    public function loadTokenFromFile(?string $path = null): self
     {
         return $this->withToken(file_get_contents($path));
     }
@@ -121,7 +121,7 @@ trait AuthenticatesCluster
      * @param  string|null  $password
      * @return $this
      */
-    public function httpAuthentication(string $username = null, string $password = null)
+    public function httpAuthentication(?string $username = null, ?string $password = null): self
     {
         if (! is_null($username) || ! is_null($password)) {
             $this->auth = [$username, $password];
@@ -136,7 +136,7 @@ trait AuthenticatesCluster
      * @param  string|null  $path
      * @return $this
      */
-    public function withCertificate(string $path = null)
+    public function withCertificate(?string $path = null): self
     {
         $this->cert = $path;
 
@@ -149,7 +149,7 @@ trait AuthenticatesCluster
      * @param  string|null  $path
      * @return $this
      */
-    public function withPrivateKey(string $path = null)
+    public function withPrivateKey(?string $path = null): self
     {
         $this->sslKey = $path;
 
@@ -162,7 +162,7 @@ trait AuthenticatesCluster
      * @param  string|null  $path
      * @return $this
      */
-    public function withCaCertificate(string $path = null)
+    public function withCaCertificate(?string $path = null): self
     {
         $this->verify = $path;
 
@@ -174,7 +174,7 @@ trait AuthenticatesCluster
      *
      * @return $this
      */
-    public function withoutSslChecks()
+    public function withoutSslChecks(): self
     {
         $this->verify = false;
 
@@ -188,7 +188,7 @@ trait AuthenticatesCluster
      * @param  string  $url
      * @return $this
      */
-    public static function inClusterConfiguration(string $url = 'https://kubernetes.default.svc')
+    public static function inClusterConfiguration(string $url = 'https://kubernetes.default.svc'): self
     {
         $cluster = new static($url);
 

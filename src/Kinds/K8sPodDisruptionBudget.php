@@ -19,30 +19,30 @@ class K8sPodDisruptionBudget extends K8sResource implements InteractsWithK8sClus
      *
      * @var null|string
      */
-    protected static $kind = 'PodDisruptionBudget';
+    protected static ?string $kind = 'PodDisruptionBudget';
 
     /**
      * Wether the resource has a namespace.
      *
      * @var bool
      */
-    protected static $namespaceable = true;
+    protected static bool $namespaceable = true;
 
     /**
      * The default version for the resource.
      *
      * @var string
      */
-    protected static $defaultVersion = 'policy/v1';
+    protected static string $defaultVersion = 'policy/v1';
 
     /**
      * Set the maximum unavailable pod budget and
      * remove the minAvailable field.
      *
-     * @param  string|int  $amount
+     * @param int|string $amount
      * @return $this
      */
-    public function setMaxUnavailable($amount)
+    public function setMaxUnavailable(int|string $amount): self
     {
         return $this->setSpec('maxUnavailable', $amount)
             ->removeSpec('minAvailable');
@@ -53,7 +53,7 @@ class K8sPodDisruptionBudget extends K8sResource implements InteractsWithK8sClus
      *
      * @return string|int|null
      */
-    public function getMaxUnavailable()
+    public function getMaxUnavailable(): int|string|null
     {
         return $this->getSpec('maxUnavailable');
     }
@@ -62,10 +62,10 @@ class K8sPodDisruptionBudget extends K8sResource implements InteractsWithK8sClus
      * Set the minimum available pod budget and
      * remove the maxUnavailable field.
      *
-     * @param  string|int  $amount
+     * @param int|string $amount
      * @return $this
      */
-    public function setMinAvailable($amount)
+    public function setMinAvailable(int|string $amount): self
     {
         return $this->setSpec('minAvailable', $amount)
             ->removeSpec('maxUnavailable');
@@ -76,7 +76,7 @@ class K8sPodDisruptionBudget extends K8sResource implements InteractsWithK8sClus
      *
      * @return string|int|null
      */
-    public function getMinAvailable()
+    public function getMinAvailable(): int|string|null
     {
         return $this->getSpec('minAvailable');
     }

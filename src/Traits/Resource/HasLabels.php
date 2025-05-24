@@ -10,7 +10,7 @@ trait HasLabels
      * @param  array  $labels
      * @return $this
      */
-    public function setLabels(array $labels)
+    public function setLabels(array $labels): self
     {
         return $this->setAttribute('metadata.labels', $labels);
     }
@@ -32,7 +32,7 @@ trait HasLabels
      * @param  mixed  $default
      * @return mixed
      */
-    public function getLabel(string $name, $default = null)
+    public function getLabel(string $name, mixed $default = null): mixed
     {
         return $this->getLabels()[$name] ?? $default;
     }
@@ -43,7 +43,7 @@ trait HasLabels
      * @param  array  $labels
      * @return $this
      */
-    public function setOrUpdateLabels(array $labels = [])
+    public function setOrUpdateLabels(array $labels = []): self
     {
         return $this->setLabels(
             array_merge($this->getLabels(), $labels)

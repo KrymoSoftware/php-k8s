@@ -17,7 +17,7 @@ trait MakesHttpCalls
      * @param  array  $query
      * @return string
      */
-    public function getCallableUrl(string $path, array $query = ['pretty' => 1])
+    public function getCallableUrl(string $path, array $query = ['pretty' => 1]): string
     {
         /**
          * Replace any name[<number>]=value occurences with name=value
@@ -33,7 +33,7 @@ trait MakesHttpCalls
      *
      * @return \GuzzleHttp\Client
      */
-    public function getClient()
+    public function getClient(): Client
     {
         $options = [
             RequestOptions::HEADERS => [
@@ -77,7 +77,7 @@ trait MakesHttpCalls
      *
      * @throws \RenokiCo\PhpK8s\Exceptions\KubernetesAPIException
      */
-    public function call(string $method, string $path, string $payload = '', array $query = ['pretty' => 1])
+    public function call(string $method, string $path, string $payload = '', array $query = ['pretty' => 1]): \Psr\Http\Message\ResponseInterface
     {
         try {
             $response = $this->getClient()->request($method, $this->getCallableUrl($path, $query), [
@@ -107,7 +107,7 @@ trait MakesHttpCalls
      *
      * @throws \RenokiCo\PhpK8s\Exceptions\KubernetesAPIException
      */
-    protected function makeRequest(string $method, string $path, string $payload = '', array $query = ['pretty' => 1])
+    protected function makeRequest(string $method, string $path, string $payload = '', array $query = ['pretty' => 1]): mixed
     {
         $resourceClass = $this->resourceClass;
 

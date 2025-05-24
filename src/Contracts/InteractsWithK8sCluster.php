@@ -24,5 +24,5 @@ interface InteractsWithK8sCluster
      *
      * @return mixed
      */
-    public function getIdentifier();
+    public function getIdentifier(): mixed;
 }

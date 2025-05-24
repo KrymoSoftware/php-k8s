@@ -17,7 +17,7 @@ trait HasAttributes
      *
      * @var array
      */
-    protected $attributes = [];
+    protected array $attributes = [];
 
     /**
      * The Kubernetes resource's attributes,
@@ -25,7 +25,7 @@ trait HasAttributes
      *
      * @var array
      */
-    protected $original = [];
+    protected array $original = [];
 
     /**
      * Wether the current state is synced
@@ -33,7 +33,7 @@ trait HasAttributes
      *
      * @var bool
      */
-    protected $synced = false;
+    protected bool $synced = false;
 
     /**
      * Set an attribute.
@@ -42,7 +42,7 @@ trait HasAttributes
      * @param  mixed  $value
      * @return $this
      */
-    public function setAttribute(string $name, $value)
+    public function setAttribute(string $name, mixed $value): self
     {
         Arr::set($this->attributes, $name, $value);
 
@@ -56,7 +56,7 @@ trait HasAttributes
      * @param  mixed  $value
      * @return $this
      */
-    public function addToAttribute(string $name, $value)
+    public function addToAttribute(string $name, mixed $value): self
     {
         $current = $this->getAttribute($name, []);
 
@@ -73,7 +73,7 @@ trait HasAttributes
      * @param  string  $name
      * @return $this
      */
-    public function removeAttribute(string $name)
+    public function removeAttribute(string $name): self
     {
         Arr::forget($this->attributes, $name);
 
@@ -84,10 +84,10 @@ trait HasAttributes
      * Get a specific attribute.
      *
      * @param  string  $name
-     * @param  mixed  $default
+     * @param mixed|null $default
      * @return mixed
      */
-    public function getAttribute(string $name, $default = null)
+    public function getAttribute(string $name, mixed $default = null): mixed
     {
         return Arr::get($this->attributes, $name, $default);
     }
@@ -98,7 +98,7 @@ trait HasAttributes
      * @param  self  $instance
      * @return bool
      */
-    public function is(self $instance)
+    public function is(self $instance): bool
     {
         return $instance->toJson() === $this->toJson();
     }
@@ -109,7 +109,7 @@ trait HasAttributes
      *
      * @return $this
      */
-    public function synced()
+    public function synced(): self
     {
         $this->synced = true;
 
@@ -143,7 +143,7 @@ trait HasAttributes
      * @param  array  $attributes
      * @return $this
      */
-    public function syncWith(array $attributes = [])
+    public function syncWith(array $attributes = []): self
     {
         $this->attributes = $attributes;
 
@@ -158,7 +158,7 @@ trait HasAttributes
      * @param  array  $attributes
      * @return $this
      */
-    public function syncOriginalWith(array $attributes = [])
+    public function syncOriginalWith(array $attributes = []): self
     {
         $this->original = $attributes;
 

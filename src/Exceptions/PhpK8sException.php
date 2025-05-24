@@ -9,18 +9,18 @@ class PhpK8sException extends Exception
     /**
      * The payload coming from the Guzzle client.
      *
-     * @var array
+     * @var array|null
      */
-    protected $payload = [];
+    protected ?array $payload = [];
 
     /**
      * Initialize the exception.
      *
      * @param  string|null  $message
-     * @param  int  $code
+     * @param int $code
      * @param  array|null  $payload
      */
-    public function __construct($message = null, $code = 0, array $payload = null)
+    public function __construct($message = null, int $code = 0, ?array $payload = null)
     {
         parent::__construct($message, $code);
 
@@ -32,7 +32,7 @@ class PhpK8sException extends Exception
      *
      * @return null|array
      */
-    public function getPayload()
+    public function getPayload(): ?array
     {
         return $this->payload;
     }

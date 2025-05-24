@@ -126,14 +126,14 @@ class KubernetesCluster
      *
      * @var string
      */
-    protected $url;
+    protected string $url;
 
     /**
      * The class name for the K8s resource.
      *
      * @var string
      */
-    protected $resourceClass;
+    protected string $resourceClass;
 
     /**
      * List all named operations with
@@ -142,7 +142,7 @@ class KubernetesCluster
      *
      * @var array
      */
-    protected static $operations = [
+    protected static array $operations = [
         self::GET_OP => 'GET',
         self::CREATE_OP => 'POST',
         self::REPLACE_OP => 'PUT',
@@ -154,15 +154,15 @@ class KubernetesCluster
         self::ATTACH_OP => 'POST',
     ];
 
-    const GET_OP = 'get';
-    const CREATE_OP = 'create';
-    const REPLACE_OP = 'replace';
-    const DELETE_OP = 'delete';
-    const LOG_OP = 'logs';
-    const WATCH_OP = 'watch';
-    const WATCH_LOGS_OP = 'watch_logs';
-    const EXEC_OP = 'exec';
-    const ATTACH_OP = 'attach';
+    const string GET_OP = 'get';
+    const string CREATE_OP = 'create';
+    const string REPLACE_OP = 'replace';
+    const string DELETE_OP = 'delete';
+    const string LOG_OP = 'logs';
+    const string WATCH_OP = 'watch';
+    const string WATCH_LOGS_OP = 'watch_logs';
+    const string EXEC_OP = 'exec';
+    const string ATTACH_OP = 'attach';
 
     /**
      * Create a new class instance.
@@ -170,7 +170,7 @@ class KubernetesCluster
      * @param  string|null  $url
      * @return void
      */
-    public function __construct(string $url = null)
+    public function __construct(?string $url = null)
     {
         $this->url = $url;
     }
@@ -181,7 +181,7 @@ class KubernetesCluster
      * @param  string  $resourceClass
      * @return $this
      */
-    public function setResourceClass(string $resourceClass)
+    public function setResourceClass(string $resourceClass): self
     {
         $this->resourceClass = $resourceClass;
 
@@ -193,13 +193,13 @@ class KubernetesCluster
      *
      * @param  string  $operation
      * @param  string  $path
-     * @param  string|null|Closure  $payload
+     * @param string|Closure|null $payload
      * @param  array  $query
      * @return mixed
      *
      * @throws \RenokiCo\PhpK8s\Exceptions\KubernetesAPIException
      */
-    public function runOperation(string $operation, string $path, $payload = '', array $query = ['pretty' => 1])
+    public function runOperation(string $operation, string $path, string|Closure|null $payload = '', array $query = ['pretty' => 1]): mixed
     {
         switch ($operation) {
             case static::WATCH_OP: return $this->watchPath($path, $payload, $query);
@@ -226,7 +226,7 @@ class KubernetesCluster
      * @param  array  $query
      * @return bool
      */
-    protected function watchPath(string $path, Closure $callback, array $query = ['pretty' => 1])
+    protected function watchPath(string $path, Closure $callback, array $query = ['pretty' => 1]): bool
     {
         $resourceClass = $this->resourceClass;
         $sock = $this->createSocketConnection($this->getCallableUrl($path, $query));
@@ -261,7 +261,7 @@ class KubernetesCluster
      * @param  array  $query
      * @return bool
      */
-    protected function watchLogsPath(string $path, Closure $callback, array $query = ['pretty' => 1])
+    protected function watchLogsPath(string $path, Closure $callback, array $query = ['pretty' => 1]): bool
     {
         $sock = $this->createSocketConnection($this->getCallableUrl($path, $query));
 
@@ -292,7 +292,8 @@ class KubernetesCluster
     protected function execPath(
         string $path,
         array $query = ['pretty' => 1, 'stdin' => 1, 'stdout' => 1, 'stderr' => 1, 'tty' => 1]
-    ) {
+    ): mixed
+    {
         try {
             return $this->makeRequest(static::$operations[static::EXEC_OP], $path, '', $query);
         } catch (KubernetesAPIException $e) {
@@ -325,7 +326,8 @@ class KubernetesCluster
         string $path,
         Closure $callback,
         array $query = ['pretty' => 1, 'stdin' => 1, 'stdout' => 1, 'stderr' => 1, 'tty' => 1]
-    ) {
+    ): mixed
+    {
         try {
             return $this->makeRequest(static::$operations[static::ATTACH_OP], $path, '', $query);
         } catch (KubernetesAPIException $e) {
@@ -347,11 +349,11 @@ class KubernetesCluster
     /**
      * Proxy the custom method to the K8s class.
      *
-     * @param  string  $method
-     * @param  array  $parameters
+     * @param string $method
+     * @param array $parameters
      * @return mixed
      */
-    public function __call($method, $parameters)
+    public function __call(string $method, array $parameters)
     {
         // Proxy the ->get[Resource]ByName($name, $namespace = 'default')
         // For example, ->getConfigMapByName('settings')

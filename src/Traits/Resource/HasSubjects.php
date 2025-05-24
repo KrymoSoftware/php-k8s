@@ -10,10 +10,10 @@ trait HasSubjects
     /**
      * Add a new subject.
      *
-     * @param  array|\RenokiCo\PhpK8s\Instances\Subject  $subject
+     * @param array|\RenokiCo\PhpK8s\Instances\Subject $subject
      * @return $this
      */
-    public function addSubject($subject)
+    public function addSubject(array|Subject $subject): self
     {
         if ($subject instanceof Subject) {
             $subject = $subject->toArray();
@@ -28,7 +28,7 @@ trait HasSubjects
      * @param  array  $subjects
      * @return $this
      */
-    public function addSubjects(array $subjects)
+    public function addSubjects(array $subjects): self
     {
         foreach ($subjects as $subject) {
             $this->addSubject($subject);
@@ -43,7 +43,7 @@ trait HasSubjects
      * @param  array  $subjects
      * @return $this
      */
-    public function setSubjects(array $subjects)
+    public function setSubjects(array $subjects): self
     {
         foreach ($subjects as &$subject) {
             if ($subject instanceof Subject) {

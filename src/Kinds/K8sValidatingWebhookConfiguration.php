@@ -17,19 +17,19 @@ class K8sValidatingWebhookConfiguration extends K8sResource implements
      *
      * @var null|string
      */
-    protected static $kind = 'ValidatingWebhookConfiguration';
+    protected static ?string $kind = 'ValidatingWebhookConfiguration';
 
     /**
      * The default version for the resource.
      *
      * @var string
      */
-    protected static $defaultVersion = 'admissionregistration.k8s.io/v1';
+    protected static string $defaultVersion = 'admissionregistration.k8s.io/v1';
 
     /**
      * Wether the resource has a namespace.
      *
      * @var bool
      */
-    protected static $namespaceable = false;
+    protected static bool $namespaceable = false;
 }

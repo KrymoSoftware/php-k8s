@@ -12,7 +12,7 @@ trait HasMountOptions
      * @param  array  $mountOptions
      * @return $this
      */
-    public function setMountOptions(array $mountOptions)
+    public function setMountOptions(array $mountOptions): self
     {
         return $this->setSpec('mountOptions', $mountOptions);
     }

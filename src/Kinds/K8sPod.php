@@ -35,21 +35,21 @@ class K8sPod extends K8sResource implements
      *
      * @var null|string
      */
-    protected static $kind = 'Pod';
+    protected static ?string $kind = 'Pod';
 
     /**
      * Wether the resource has a namespace.
      *
      * @var bool
      */
-    protected static $namespaceable = true;
+    protected static bool $namespaceable = true;
 
     /**
      * Get the DNS name within the cluster.
      *
      * @return string|null
      */
-    public function getClusterDns()
+    public function getClusterDns(): ?string
     {
         $ipSlug = str_replace('.', '-', $this->getPodIps()[0]['ip'] ?? '');
 
@@ -62,7 +62,7 @@ class K8sPod extends K8sResource implements
      * @param  array  $containers
      * @return $this
      */
-    public function setContainers(array $containers = [])
+    public function setContainers(array $containers = []): self
     {
         return $this->setSpec(
             'containers',
@@ -76,7 +76,7 @@ class K8sPod extends K8sResource implements
      * @param  array  $containers
      * @return $this
      */
-    public function setInitContainers(array $containers = [])
+    public function setInitContainers(array $containers = []): self
     {
         return $this->setSpec(
             'initContainers',
@@ -128,7 +128,7 @@ class K8sPod extends K8sResource implements
      * @param  string  $name
      * @return $this
      */
-    public function addPulledSecret(string $name)
+    public function addPulledSecret(string $name): self
     {
         return $this->addToSpec('imagePullSecrets', ['name' => $name]);
     }
@@ -139,7 +139,7 @@ class K8sPod extends K8sResource implements
      * @param  array  $names
      * @return $this
      */
-    public function addPulledSecrets(array $names)
+    public function addPulledSecrets(array $names): self
     {
         foreach ($names as $name) {
             $this->addPulledSecret($name);
@@ -161,10 +161,10 @@ class K8sPod extends K8sResource implements
     /**
      * Add a new volume to the list.
      *
-     * @param  array|\RenokiCo\PhpK8s\Instances\Volume  $volume
+     * @param \RenokiCo\PhpK8s\Instances\Volume|array $volume
      * @return $this
      */
-    public function addVolume($volume)
+    public function addVolume(Volume|array $volume): self
     {
         if ($volume instanceof Volume) {
             $volume = $volume->toArray();
@@ -179,7 +179,7 @@ class K8sPod extends K8sResource implements
      * @param  array  $volumes
      * @return $this
      */
-    public function addVolumes(array $volumes)
+    public function addVolumes(array $volumes): self
     {
         foreach ($volumes as $volume) {
             $this->addVolume($volume);
@@ -194,7 +194,7 @@ class K8sPod extends K8sResource implements
      * @param  array  $volumes
      * @return $this
      */
-    public function setVolumes(array $volumes)
+    public function setVolumes(array $volumes): self
     {
         foreach ($volumes as &$volume) {
             if ($volume instanceof Volume) {
@@ -211,7 +211,7 @@ class K8sPod extends K8sResource implements
      * @param  bool  $asInstance
      * @return array
      */
-    public function getVolumes(bool $asInstance = true)
+    public function getVolumes(bool $asInstance = true): array
     {
         $volumes = $this->getSpec('volumes', []);
 
@@ -230,7 +230,7 @@ class K8sPod extends K8sResource implements
      *
      * @return $this
      */
-    public function restartOnFailure()
+    public function restartOnFailure(): self
     {
         return $this->setSpec('restartPolicy', 'OnFailure');
     }
@@ -240,7 +240,7 @@ class K8sPod extends K8sResource implements
      *
      * @return $this
      */
-    public function neverRestart()
+    public function neverRestart(): self
     {
         return $this->setSpec('restartPolicy', 'Never');
     }
@@ -250,7 +250,7 @@ class K8sPod extends K8sResource implements
      *
      * @return string
      */
-    public function getRestartPolicy()
+    public function getRestartPolicy(): string
     {
         return $this->getSpec('restartPolicy', 'Always');
     }
@@ -258,16 +258,12 @@ class K8sPod extends K8sResource implements
     /**
      * Set the node affinity.
      *
-     * @param  \RenokiCo\PhpK8s\Instances\Affinity  $affinity
+     * @param \RenokiCo\PhpK8s\Instances\Affinity $affinity
      * @return $this
      */
-    public function setNodeAffinity($affinity)
+    public function setNodeAffinity(Affinity $affinity): self
     {
-        if ($affinity instanceof Affinity) {
-            $affinity = $affinity->toArray();
-        }
-
-        return $this->setSpec('affinity.nodeAffinity', $affinity);
+        return $this->setSpec('affinity.nodeAffinity', $affinity->toArray());
     }
 
     /**
@@ -276,12 +272,12 @@ class K8sPod extends K8sResource implements
      * @param  bool  $asInstance
      * @return array|\RenokiCo\PhpK8s\Instances\Affinity
      */
-    public function getNodeAffinity(bool $asInstance = true)
+    public function getNodeAffinity(bool $asInstance = true): Affinity|array
     {
         $affinity = $this->getSpec('affinity.nodeAffinity', null);
 
         if (! $affinity) {
-            return;
+            return [];
         }
 
         return $asInstance ? new Affinity($affinity) : $affinity;
@@ -290,16 +286,12 @@ class K8sPod extends K8sResource implements
     /**
      * Set the pod affinity.
      *
-     * @param  \RenokiCo\PhpK8s\Instances\Affinity  $affinity
+     * @param \RenokiCo\PhpK8s\Instances\Affinity $affinity
      * @return $this
      */
-    public function setPodAffinity($affinity)
+    public function setPodAffinity(Affinity $affinity): self
     {
-        if ($affinity instanceof Affinity) {
-            $affinity = $affinity->toArray();
-        }
-
-        return $this->setSpec('affinity.podAffinity', $affinity);
+        return $this->setSpec('affinity.podAffinity', $affinity->toArray());
     }
 
     /**
@@ -308,12 +300,12 @@ class K8sPod extends K8sResource implements
      * @param  bool  $asInstance
      * @return array|\RenokiCo\PhpK8s\Instances\Affinity
      */
-    public function getPodAffinity(bool $asInstance = true)
+    public function getPodAffinity(bool $asInstance = true): Affinity|array
     {
         $affinity = $this->getSpec('affinity.podAffinity', null);
 
         if (! $affinity) {
-            return;
+            return [];
         }
 
         return $asInstance ? new Affinity($affinity) : $affinity;
@@ -351,7 +343,7 @@ class K8sPod extends K8sResource implements
      *
      * @return string|null
      */
-    public function getHostIp()
+    public function getHostIp(): ?string
     {
         return $this->getStatus('hostIP', null);
     }
@@ -401,7 +393,7 @@ class K8sPod extends K8sResource implements
      * @param  bool  $asInstance
      * @return \RenokiCo\PhpK8s\Instances\Container|array|null
      */
-    public function getContainer(string $containerName, bool $asInstance = true)
+    public function getContainer(string $containerName, bool $asInstance = true): array|Container|null
     {
         return collect($this->getContainerStatuses($asInstance))->first(function ($container) use ($containerName) {
             $name = $container instanceof Container
@@ -419,7 +411,7 @@ class K8sPod extends K8sResource implements
      * @param  bool  $asInstance
      * @return \RenokiCo\PhpK8s\Instances\Container|array|null
      */
-    public function getInitContainer(string $containerName, bool $asInstance = true)
+    public function getInitContainer(string $containerName, bool $asInstance = true): array|Container|null
     {
         return collect($this->getInitContainerStatuses($asInstance))->first(function ($container) use ($containerName) {
             $name = $container instanceof Container
@@ -449,7 +441,7 @@ class K8sPod extends K8sResource implements
      */
     public function initContainersAreReady(): bool
     {
-        return collect($this->getIniContainerStatuses())->reject(function ($container) {
+        return collect($this->getInitContainerStatuses())->reject(function ($container) {
             return $container->isReady();
         })->isEmpty();
     }

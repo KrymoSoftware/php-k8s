@@ -10,7 +10,7 @@ trait HasAnnotations
      * @param  array  $annotations
      * @return $this
      */
-    public function setAnnotations(array $annotations)
+    public function setAnnotations(array $annotations): self
     {
         return $this->setAttribute('metadata.annotations', $annotations);
     }
@@ -32,7 +32,7 @@ trait HasAnnotations
      * @param  mixed  $default
      * @return mixed
      */
-    public function getAnnotation(string $name, $default = null)
+    public function getAnnotation(string $name, mixed $default = null): mixed
     {
         return $this->getAnnotations()[$name] ?? $default;
     }
@@ -43,7 +43,7 @@ trait HasAnnotations
      * @param  array  $annotations
      * @return $this
      */
-    public function setOrUpdateAnnotations(array $annotations = [])
+    public function setOrUpdateAnnotations(array $annotations = []): self
     {
         return $this->setAnnotations(
             array_merge($this->getAnnotations(), $annotations)

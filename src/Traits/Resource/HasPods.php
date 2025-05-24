@@ -11,7 +11,7 @@ trait HasPods
      *
      * @var Closure|null
      */
-    protected static $podSelectorCallback;
+    protected static ?Closure $podSelectorCallback;
 
     /**
      * Get the selector for the pods that are owned by this resource.
@@ -56,7 +56,7 @@ trait HasPods
      * @param  array  $query
      * @return \RenokiCo\PhpK8s\ResourcesList
      */
-    public function getPods(array $query = ['pretty' => 1])
+    public function getPods(array $query = ['pretty' => 1]): \RenokiCo\PhpK8s\ResourcesList
     {
         $labelSelector = urldecode(http_build_query(
             $this->podsSelector()

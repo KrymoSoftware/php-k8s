@@ -37,21 +37,21 @@ class K8sStatefulSet extends K8sResource implements
      *
      * @var null|string
      */
-    protected static $kind = 'StatefulSet';
+    protected static ?string $kind = 'StatefulSet';
 
     /**
      * The default version for the resource.
      *
      * @var string
      */
-    protected static $defaultVersion = 'apps/v1';
+    protected static string $defaultVersion = 'apps/v1';
 
     /**
      * Wether the resource has a namespace.
      *
      * @var bool
      */
-    protected static $namespaceable = true;
+    protected static bool $namespaceable = true;
 
     /**
      * Set the updating strategy for the set.
@@ -60,7 +60,7 @@ class K8sStatefulSet extends K8sResource implements
      * @param  int  $partition
      * @return $this
      */
-    public function setUpdateStrategy(string $strategy, int $partition = 0)
+    public function setUpdateStrategy(string $strategy, int $partition = 0): self
     {
         if ($strategy === 'RollingUpdate') {
             $this->setSpec('updateStrategy.rollingUpdate.partition', $partition);
@@ -75,7 +75,7 @@ class K8sStatefulSet extends K8sResource implements
      * @param  K8sService|string  $service
      * @return $this
      */
-    public function setService($service)
+    public function setService($service): self
     {
         if ($service instanceof K8sService) {
             $service = $service->getName();
@@ -89,7 +89,7 @@ class K8sStatefulSet extends K8sResource implements
      *
      * @return string|null
      */
-    public function getService()
+    public function getService(): ?string
     {
         return $this->getSpec('serviceName', null);
     }
@@ -99,11 +99,9 @@ class K8sStatefulSet extends K8sResource implements
      *
      * @return null|K8sService
      */
-    public function getServiceInstance()
+    public function getServiceInstance(): ?K8sService
     {
-        return $this->cluster
-            ? $this->cluster->getServiceByName($this->getService())
-            : null;
+        return $this->cluster->getServiceByName($this->getService());
     }
 
     /**
@@ -112,7 +110,7 @@ class K8sStatefulSet extends K8sResource implements
      * @param  array  $volumeClaims
      * @return $this
      */
-    public function setVolumeClaims(array $volumeClaims = [])
+    public function setVolumeClaims(array $volumeClaims = []): self
     {
         foreach ($volumeClaims as &$volumeClaim) {
             if ($volumeClaim instanceof K8sPersistentVolumeClaim) {
@@ -129,7 +127,7 @@ class K8sStatefulSet extends K8sResource implements
      * @param  bool  $asInstance
      * @return array
      */
-    public function getVolumeClaims(bool $asInstance = true)
+    public function getVolumeClaims(bool $asInstance = true): array
     {
         $volumeClaims = $this->getSpec('volumeClaimTemplates', []);
 

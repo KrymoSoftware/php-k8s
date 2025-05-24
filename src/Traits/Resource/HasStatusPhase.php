@@ -11,7 +11,7 @@ trait HasStatusPhase
      *
      * @return string|null
      */
-    public function getPhase()
+    public function getPhase(): ?string
     {
         return $this->getStatus('phase', null);
     }

@@ -31,7 +31,7 @@ trait HasWebhooks
      * @param  array  $webhooks
      * @return $this
      */
-    public function setWebhooks(array $webhooks = [])
+    public function setWebhooks(array $webhooks = []): self
     {
         return $this->setAttribute(
             'webhooks',
@@ -46,7 +46,7 @@ trait HasWebhooks
      * @param  bool  $asInstance
      * @return null|array|\RenokiCo\PhpK8s\Instances\Webhook
      */
-    public function getWebhook(string $webhookName, bool $asInstance = true)
+    public function getWebhook(string $webhookName, bool $asInstance = true): Webhook|array|null
     {
         return collect($this->getWebhooks($asInstance))->first(function ($webhook) use ($webhookName) {
             $name = $webhook instanceof Webhook
@@ -63,7 +63,7 @@ trait HasWebhooks
      * @param  array  $webhooks
      * @return $this
      */
-    public function setOrUpdateWebhooks(array $webhooks = [])
+    public function setOrUpdateWebhooks(array $webhooks = []): self
     {
         return $this->setWebhooks(
             array_merge($this->getWebhooks(), $webhooks)

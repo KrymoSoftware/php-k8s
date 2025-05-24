@@ -9,14 +9,14 @@ class ResourceMetric extends Instance
      *
      * @var string
      */
-    protected static $type = 'Resource';
+    protected static string $type = 'Resource';
 
     /**
      * Set the resource type to CPU.
      *
      * @return $this
      */
-    public function cpu()
+    public function cpu(): self
     {
         return $this->setMetric('cpu');
     }
@@ -26,7 +26,7 @@ class ResourceMetric extends Instance
      *
      * @return $this
      */
-    public function memory()
+    public function memory(): self
     {
         return $this->setMetric('memory');
     }
@@ -34,10 +34,10 @@ class ResourceMetric extends Instance
     /**
      * Set average utilization for the metric.
      *
-     * @param  int|string  $utilization
+     * @param int|string $utilization
      * @return $this
      */
-    public function averageUtilization($utilization = 50)
+    public function averageUtilization(int|string $utilization = 50): self
     {
         return $this->setAttribute('resource.target.type', 'Utilization')
             ->setAttribute('resource.target.averageUtilization', $utilization);
@@ -48,7 +48,7 @@ class ResourceMetric extends Instance
      *
      * @return string|int|float
      */
-    public function getAverageUtilization()
+    public function getAverageUtilization(): float|int|string
     {
         return $this->getAttribute('resource.target.averageUtilization', 0);
     }
@@ -56,10 +56,10 @@ class ResourceMetric extends Instance
     /**
      * Set average value for the metric.
      *
-     * @param  string|int|float  $value
+     * @param float|int|string $value
      * @return $this
      */
-    public function averageValue($value)
+    public function averageValue(float|int|string $value): self
     {
         return $this->setAttribute('resource.target.type', 'AverageValue')
             ->setAttribute('resource.target.averageValue', $value);
@@ -70,7 +70,7 @@ class ResourceMetric extends Instance
      *
      * @return string|int|float
      */
-    public function getAverageValue()
+    public function getAverageValue(): float|int|string
     {
         return $this->getAttribute('resource.target.averageValue');
     }
@@ -78,10 +78,10 @@ class ResourceMetric extends Instance
     /**
      * Set the specific value for the metric.
      *
-     * @param  string|int|float  $value
+     * @param float|int|string $value
      * @return $this
      */
-    public function value($value)
+    public function value(float|int|string $value): self
     {
         return $this->setAttribute('resource.target.type', 'Value')
             ->setAttribute('resource.target.value', $value);
@@ -92,7 +92,7 @@ class ResourceMetric extends Instance
      *
      * @return string|int|float
      */
-    public function getValue()
+    public function getValue(): float|int|string
     {
         return $this->getAttribute('resource.target.value');
     }
@@ -113,7 +113,7 @@ class ResourceMetric extends Instance
      * @param  string  $name
      * @return $this
      */
-    public function setMetric(string $name)
+    public function setMetric(string $name): self
     {
         return $this->setName($name);
     }
@@ -124,7 +124,7 @@ class ResourceMetric extends Instance
      * @param  string  $name
      * @return $this
      */
-    public function setName(string $name)
+    public function setName(string $name): self
     {
         return $this->setAttribute('resource.name', $name);
     }
@@ -132,10 +132,9 @@ class ResourceMetric extends Instance
     /**
      * Get the resource metric name.
      *
-     * @param  string  $name
      * @return $this
      */
-    public function getName()
+    public function getName(): self
     {
         return $this->getAttribute('resource.name');
     }
@@ -145,7 +144,7 @@ class ResourceMetric extends Instance
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return array_merge($this->attributes, [
             'type' => static::$type,

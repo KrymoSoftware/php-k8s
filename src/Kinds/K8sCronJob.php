@@ -21,29 +21,29 @@ class K8sCronJob extends K8sResource implements InteractsWithK8sCluster, Watchab
      *
      * @var null|string
      */
-    protected static $kind = 'CronJob';
+    protected static ?string $kind = 'CronJob';
 
     /**
      * The default version for the resource.
      *
      * @var string
      */
-    protected static $defaultVersion = 'batch/v1';
+    protected static string $defaultVersion = 'batch/v1';
 
     /**
      * Wether the resource has a namespace.
      *
      * @var bool
      */
-    protected static $namespaceable = true;
+    protected static bool $namespaceable = true;
 
     /**
      * Set the job template.
      *
-     * @param  array|K8sJob  $job
+     * @param array|K8sJob $job
      * @return $this
      */
-    public function setJobTemplate($job)
+    public function setJobTemplate(K8sJob|array $job): self
     {
         if ($job instanceof K8sJob) {
             $job = $job->toArray();
@@ -58,7 +58,7 @@ class K8sCronJob extends K8sResource implements InteractsWithK8sCluster, Watchab
      * @param  bool  $asInstance
      * @return array|K8sJob
      */
-    public function getJobTemplate(bool $asInstance = true)
+    public function getJobTemplate(bool $asInstance = true): K8sJob|array
     {
         $template = $this->getSpec('jobTemplate', []);
 
@@ -72,10 +72,10 @@ class K8sCronJob extends K8sResource implements InteractsWithK8sCluster, Watchab
     /**
      * Set the schedule for the cronjob.
      *
-     * @param  CronExpression|string  $schedule
+     * @param string|CronExpression $schedule
      * @return $this
      */
-    public function setSchedule($schedule)
+    public function setSchedule(CronExpression|string $schedule): self
     {
         if ($schedule instanceof CronExpression) {
             $schedule = $schedule->getExpression();
@@ -90,7 +90,7 @@ class K8sCronJob extends K8sResource implements InteractsWithK8sCluster, Watchab
      * @param  bool  $asInstance
      * @return CronExpression|string
      */
-    public function getSchedule(bool $asInstance = true)
+    public function getSchedule(bool $asInstance = true): CronExpression|string
     {
         $schedule = $this->getSpec('schedule', '* * * * *');
 
@@ -106,7 +106,7 @@ class K8sCronJob extends K8sResource implements InteractsWithK8sCluster, Watchab
      *
      * @return DateTime|null
      */
-    public function getLastSchedule()
+    public function getLastSchedule(): ?DateTime
     {
         if (! $lastSchedule = $this->getStatus('lastScheduleTime')) {
             return null;
@@ -120,7 +120,7 @@ class K8sCronJob extends K8sResource implements InteractsWithK8sCluster, Watchab
      *
      * @return Collection
      */
-    public function getActiveJobs()
+    public function getActiveJobs(): Collection
     {
         return collect($this->getStatus('active', []))->map(function ($job) {
             return $this->cluster->getJobByName($job['name'], $this->getNamespace());
