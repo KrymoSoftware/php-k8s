@@ -18,10 +18,10 @@ trait InitializesInstances
     /**
      * Create a new container instance.
      *
-     * @param  array  $attributes
+     * @param  ?array  $attributes
      * @return \RenokiCo\PhpK8s\Instances\Container
      */
-    public static function container(array $attributes = []): Container
+    public static function container(?array $attributes = []): Container
     {
         return new Container($attributes);
     }
@@ -29,10 +29,10 @@ trait InitializesInstances
     /**
      * Create a new probe instance.
      *
-     * @param  array  $attributes
+     * @param  ?array  $attributes
      * @return \RenokiCo\PhpK8s\Instances\Probe
      */
-    public static function probe(array $attributes = []): Probe
+    public static function probe(?array $attributes = []): Probe
     {
         return new Probe($attributes);
     }
@@ -40,10 +40,10 @@ trait InitializesInstances
     /**
      * Create a new metric instance.
      *
-     * @param  array  $attributes
+     * @param  ?array  $attributes
      * @return \RenokiCo\PhpK8s\Instances\ResourceMetric
      */
-    public static function metric(array $attributes = []): ResourceMetric
+    public static function metric(?array $attributes = []): ResourceMetric
     {
         return new ResourceMetric($attributes);
     }
@@ -51,10 +51,10 @@ trait InitializesInstances
     /**
      * Create a new object instance.
      *
-     * @param  array  $attributes
+     * @param  ?array  $attributes
      * @return \RenokiCo\PhpK8s\Instances\ResourceObject
      */
-    public static function object(array $attributes = []): ResourceObject
+    public static function object(?array $attributes = []): ResourceObject
     {
         return new ResourceObject($attributes);
     }
@@ -62,10 +62,10 @@ trait InitializesInstances
     /**
      * Create a new rule instance.
      *
-     * @param  array  $attributes
+     * @param  ?array  $attributes
      * @return \RenokiCo\PhpK8s\Instances\Rule
      */
-    public static function rule(array $attributes = []): Rule
+    public static function rule(?array $attributes = []): Rule
     {
         return new Rule($attributes);
     }
@@ -73,10 +73,10 @@ trait InitializesInstances
     /**
      * Create a new subject instance.
      *
-     * @param  array  $attributes
+     * @param  ?array  $attributes
      * @return \RenokiCo\PhpK8s\Instances\Subject
      */
-    public static function subject(array $attributes = []): Subject
+    public static function subject(?array $attributes = []): Subject
     {
         return new Subject($attributes);
     }
@@ -84,10 +84,10 @@ trait InitializesInstances
     /**
      * Create a new volume instance.
      *
-     * @param  array  $attributes
+     * @param  ?array  $attributes
      * @return \RenokiCo\PhpK8s\Instances\Volume
      */
-    public static function volume(array $attributes = []): Volume
+    public static function volume(?array $attributes = []): Volume
     {
         return new Volume($attributes);
     }
@@ -95,10 +95,10 @@ trait InitializesInstances
     /**
      * Create a new affinity instance.
      *
-     * @param  array  $attributes
+     * @param  ?array  $attributes
      * @return \RenokiCo\PhpK8s\Instances\Affinity
      */
-    public static function affinity(array $attributes = []): Affinity
+    public static function affinity(?array $attributes = []): Affinity
     {
         return new Affinity($attributes);
     }
@@ -106,10 +106,10 @@ trait InitializesInstances
     /**
      * Create a new expression instance.
      *
-     * @param  array  $attributes
+     * @param  ?array  $attributes
      * @return \RenokiCo\PhpK8s\Instances\Expression
      */
-    public static function expression(array $attributes = []): Expression
+    public static function expression(?array $attributes = []): Expression
     {
         return new Expression($attributes);
     }
@@ -117,10 +117,10 @@ trait InitializesInstances
     /**
      * Create a new webhook instance.
      *
-     * @param  array  $attributes
+     * @param  ?array  $attributes
      * @return \RenokiCo\PhpK8s\Instances\Webhook
      */
-    public static function webhook(array $attributes = []): Webhook
+    public static function webhook(?array $attributes = []): Webhook
     {
         return new Webhook($attributes);
     }
