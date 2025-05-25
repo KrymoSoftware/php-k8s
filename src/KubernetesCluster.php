@@ -395,6 +395,14 @@ class KubernetesCluster
             }
         }
 
+        // Proxy the static calls to instances
+        if (in_array($method, [
+            'container', 'probe', 'metric', 'object', 'affinity',
+            'expression', 'rule', 'subject', 'volume', 'webhook',
+        ])) {
+            return K8s::{$method}(...$parameters);
+        }
+
         return K8s::{$method}($this, ...$parameters);
     }
 }
