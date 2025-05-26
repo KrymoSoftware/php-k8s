@@ -21,7 +21,7 @@ trait LoadsFromKubeConfig
      *
      * @var null|string
      */
-    protected static ?string $tempFolder;
+    protected static ?string $tempFolder = null;
 
     /**
      * Set the temporary folder for the writings.
