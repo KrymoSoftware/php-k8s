@@ -16,10 +16,11 @@ jobs:
     if: |
       !contains(github.event.head_commit.message, 'skip ci') &&
       (github.event_name != 'pull_request' || (
-        github.actor_association == 'CONTRIBUTOR' ||
-        github.actor_association == 'MEMBER' ||
-        github.actor_association == 'COLLABORATOR' ||
-        github.actor_association == 'OWNER'
+        github.event.pull_request.author_association == 'CONTRIBUTOR' ||
+        github.event.pull_request.author_association == 'COLLABORATOR' ||
+        github.event.pull_request.author_association == 'MANNEQUIN' ||
+        github.event.pull_request.author_association == 'MEMBER' ||
+        github.event.pull_request.author_association == 'OWNER'
       ))
 
     runs-on: ubuntu-latest
