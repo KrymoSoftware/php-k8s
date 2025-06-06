@@ -363,9 +363,13 @@ class KubernetesCluster
             // Check the method from the proxied K8s::class exists.
             // For example, the method ->configmap() should exist.
             if (method_exists(K8s::class, $resource)) {
+                $name = $parameters['name'] ?? $parameters[0];
+                $namespace = $parameters['namespace'] ?? $parameters[1] ?? K8sResource::$defaultNamespace;
+                $query = $parameters['query'] ?? ($parameters[2] ?? ['pretty' => 1]);
+
                 return $this->{$resource}()
-                    ->whereNamespace($parameters[1] ?? K8sResource::$defaultNamespace)
-                    ->getByName($parameters[0], $parameters[2] ?? ['pretty' => 1]);
+                    ->whereNamespace($namespace)
+                    ->getByName($name, $query);
             }
         }
 
@@ -377,7 +381,9 @@ class KubernetesCluster
             $resource = Str::singular($resourcePlural);
 
             if (method_exists(K8s::class, $resource)) {
-                return $this->{$resource}()->allNamespaces($parameters[0] ?? ['pretty' => 1]);
+                $query = $parameters['query'] ?? $parameters[0] ?? ['pretty' => 1];
+
+                return $this->{$resource}()->allNamespaces($query);
             }
         }
 
@@ -389,9 +395,12 @@ class KubernetesCluster
             $resource = Str::singular($resourcePlural);
 
             if (method_exists(K8s::class, $resource)) {
+                $namespace = $parameters['namespace'] ?? $parameters[0] ?? K8sResource::$defaultNamespace;
+                $query = $parameters['query'] ?? $parameters[1] ?? ['pretty' => 1];
+
                 return $this->{$resource}()
-                    ->whereNamespace($parameters[0] ?? K8sResource::$defaultNamespace)
-                    ->all($parameters[1] ?? ['pretty' => 1]);
+                    ->whereNamespace($namespace)
+                    ->all($query);
             }
         }
 
