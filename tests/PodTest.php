@@ -226,6 +226,11 @@ class PodTest extends TestCase
 
         $ipSlug = str_replace('.', '-', $pod->getPodIps()[0]['ip'] ?? '');
         $this->assertEquals("{$ipSlug}.{$pod->getNamespace()}.pod.cluster.local", $pod->getClusterDns());
+
+        $this->assertTrue(
+            $pod->getCreationTimestamp()->getTimestamp() > (time() - 60),
+            'Creation timestamp is not within the last minute.'
+        );
     }
 
     public function runGetAllTests()

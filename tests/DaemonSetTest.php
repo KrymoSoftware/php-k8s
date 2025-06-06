@@ -112,6 +112,10 @@ class DaemonSetTest extends TestCase
         $this->assertEquals(['tier' => 'backend'], $ds->getLabels());
         $this->assertEquals(0, $ds->getMinReadySeconds());
         $this->assertEquals($pod->getName(), $ds->getTemplate()->getName());
+        $this->assertTrue(
+            $ds->getCreationTimestamp()->getTimestamp() > (time() - 60),
+            'Creation timestamp is not within the last minute.'
+        );
 
         $this->assertInstanceOf(K8sPod::class, $ds->getTemplate());
 

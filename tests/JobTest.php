@@ -109,6 +109,10 @@ class JobTest extends TestCase
         $this->assertEquals('batch/v1', $job->getApiVersion());
         $this->assertEquals('pi', $job->getName());
         $this->assertEquals(['tier' => 'compute'], $job->getLabels());
+        $this->assertTrue(
+            $job->getCreationTimestamp()->getTimestamp() > (time() - 60),
+            'Creation timestamp is not within the last minute.'
+        );
 
         $annotations = $job->getAnnotations();
         foreach (['perl/annotation' => 'yes'] as $key => $value) {

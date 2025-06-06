@@ -69,6 +69,10 @@ class EventTest extends TestCase
 
         $this->assertInstanceOf(K8sEvent::class, $matchedEvent);
         $this->assertTrue($matchedEvent->is($event));
+        $this->assertTrue(
+            $event->getCreationTimestamp()->getTimestamp() > (time() - 60),
+            'Creation timestamp is not within the last minute.'
+        );
     }
 
     public function runGetAllTests()

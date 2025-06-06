@@ -92,6 +92,10 @@ class SecretTest extends TestCase
         $this->assertEquals(['tier' => 'backend'], $secret->getLabels());
         $this->assertEquals(['postgres' => base64_encode('postgres')], $secret->getData(false));
         $this->assertEquals(['postgres' => 'postgres'], $secret->getData(true));
+        $this->assertTrue(
+            $secret->getCreationTimestamp()->getTimestamp() > (time() - 60),
+            'Creation timestamp is not within the last minute.'
+        );
     }
 
     public function runGetAllTests()

@@ -121,6 +121,10 @@ class ClusterRoleBindingTest extends TestCase
         $this->assertEquals(['tier' => 'backend'], $crb->getLabels());
         $this->assertEquals([$subject], $crb->getSubjects());
         $this->assertEquals(['apiGroup' => 'rbac.authorization.k8s.io', 'kind' => 'ClusterRole', 'name' => 'admin-cr-for-binding'], $crb->getRole());
+        $this->assertTrue(
+            $crb->getCreationTimestamp()->getTimestamp() > (time() - 60),
+            'Creation timestamp is not within the last minute.'
+        );
     }
 
     public function runGetAllTests()

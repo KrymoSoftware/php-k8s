@@ -109,6 +109,10 @@ class IngressTest extends TestCase
         $this->assertEquals(['nginx/ann' => 'yes'], $ing->getAnnotations());
         $this->assertEquals(self::$tls, $ing->getTls());
         $this->assertEquals(self::$rules, $ing->getRules());
+        $this->assertTrue(
+            $ing->getCreationTimestamp()->getTimestamp() > (time() - 60),
+            'Creation timestamp is not within the last minute.'
+        );
     }
 
     public function runGetAllTests()

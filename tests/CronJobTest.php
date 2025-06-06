@@ -127,6 +127,10 @@ class CronJobTest extends TestCase
         $this->assertEquals(['tier' => 'useless'], $cronjob->getLabels());
         $this->assertEquals(['perl/annotation' => 'no'], $cronjob->getAnnotations());
         $this->assertEquals('Never', $pod->getRestartPolicy());
+        $this->assertTrue(
+            $cronjob->getCreationTimestamp()->getTimestamp() > (time() - 60),
+            'Creation timestamp is not within the last minute.'
+        );
 
         $this->assertInstanceOf(K8sJob::class, $cronjob->getJobTemplate());
         $this->assertInstanceOf(CronExpression::class, $cronjob->getSchedule());

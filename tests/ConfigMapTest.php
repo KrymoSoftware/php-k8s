@@ -90,6 +90,10 @@ class ConfigMapTest extends TestCase
         $this->assertEquals(['tier' => 'backend'], $cm->getLabels());
         $this->assertEquals(['key2' => 'val2'], $cm->getData());
         $this->assertEquals('val2', $cm->getData('key2'));
+        $this->assertTrue(
+            $cm->getCreationTimestamp()->getTimestamp() > (time() - 60),
+            'Creation timestamp is not within the last minute.'
+        );
     }
 
     public function runGetAllTests()

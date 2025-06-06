@@ -176,6 +176,10 @@ class StatefulSetTest extends TestCase
         $this->assertEquals($svc->getName(), $sts->getService());
         $this->assertEquals($pod->getName(), $sts->getTemplate()->getName());
         $this->assertEquals($pvc->getName(), $sts->getVolumeClaims()[0]->getName());
+        $this->assertTrue(
+            $sts->getCreationTimestamp()->getTimestamp() > (time() - 60),
+            'Creation timestamp is not within the last minute.'
+        );
 
         $this->assertInstanceOf(K8sPod::class, $sts->getTemplate());
         $this->assertInstanceOf(K8sPersistentVolumeClaim::class, $sts->getVolumeClaims()[0]);

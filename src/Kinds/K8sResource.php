@@ -12,6 +12,7 @@ use RenokiCo\PhpK8s\K8s;
 use RenokiCo\PhpK8s\KubernetesCluster;
 use RenokiCo\PhpK8s\Traits\Resource\HasAnnotations;
 use RenokiCo\PhpK8s\Traits\Resource\HasAttributes;
+use RenokiCo\PhpK8s\Traits\Resource\HasCreationTimestamp;
 use RenokiCo\PhpK8s\Traits\Resource\HasEvents;
 use RenokiCo\PhpK8s\Traits\Resource\HasKind;
 use RenokiCo\PhpK8s\Traits\Resource\HasLabels;
@@ -29,6 +30,7 @@ class K8sResource implements Arrayable, Jsonable
     use HasLabels;
     use HasName;
     use HasNamespace;
+    use HasCreationTimestamp;
     use HasVersion;
     use RunsClusterOperations;
 

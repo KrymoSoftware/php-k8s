@@ -147,6 +147,10 @@ class HorizontalPodAutoscalerTest extends TestCase
         $this->assertEquals([$cpuMetric->toArray()], $hpa->getMetrics());
         $this->assertEquals(1, $hpa->getMinReplicas());
         $this->assertEquals(10, $hpa->getMaxReplicas());
+        $this->assertTrue(
+            $hpa->getCreationTimestamp()->getTimestamp() > (time() - 60),
+            'Creation timestamp is not within the last minute.'
+        );
 
         while (! $dep->allPodsAreRunning()) {
             dump("Waiting for pods of {$dep->getName()} to be up and running...");

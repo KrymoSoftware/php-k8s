@@ -122,6 +122,10 @@ class DeploymentTest extends TestCase
         $this->assertEquals(1, $dep->getReplicas());
         $this->assertEquals(0, $dep->getMinReadySeconds());
         $this->assertEquals($pod->getName(), $dep->getTemplate()->getName());
+        $this->assertTrue(
+            $dep->getCreationTimestamp()->getTimestamp() > (time() - 60),
+            'Creation timestamp is not within the last minute.'
+        );
 
         $this->assertInstanceOf(K8sPod::class, $dep->getTemplate());
 

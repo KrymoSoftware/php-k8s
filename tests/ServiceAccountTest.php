@@ -84,6 +84,10 @@ class ServiceAccountTest extends TestCase
         $this->assertEquals(['tier' => 'backend'], $sa->getLabels());
         $this->assertEquals([['name' => $secret->getName()]], $sa->getSecrets());
         $this->assertEquals([['name' => 'postgres']], $sa->getImagePullSecrets());
+        $this->assertTrue(
+            $sa->getCreationTimestamp()->getTimestamp() > (time() - 60),
+            'Creation timestamp is not within the last minute.'
+        );
     }
 
     public function runGetAllTests()

@@ -95,6 +95,10 @@ class PersistentVolumeTest extends TestCase
         $this->assertEquals(['ReadWriteOnce'], $pv->getAccessModes());
         $this->assertEquals(['debug'], $pv->getMountOptions());
         $this->assertEquals('sc1', $pv->getStorageClass());
+        $this->assertTrue(
+            $pv->getCreationTimestamp()->getTimestamp() > (time() - 60),
+            'Creation timestamp is not within the last minute.'
+        );
 
         while (! $pv->isAvailable()) {
             dump("Waiting for PV {$pv->getName()} to be available...");
