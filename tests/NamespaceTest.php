@@ -90,6 +90,10 @@ class NamespaceTest extends TestCase
             'kubernetes.io/metadata.name' => 'production',
             'tier' => 'backend',
         ], $ns->getLabels());
+        $this->assertTrue(
+            $ns->getCreationTimestamp()->getTimestamp() > (time() - 60),
+            'Creation timestamp is not within the last minute.'
+        );
 
         $ns->refresh();
 

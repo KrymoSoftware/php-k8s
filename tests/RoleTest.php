@@ -83,6 +83,10 @@ class RoleTest extends TestCase
         $this->assertEquals('admin', $role->getName());
         $this->assertEquals(['tier' => 'backend'], $role->getLabels());
         $this->assertEquals([$rule], $role->getRules());
+        $this->assertTrue(
+            $role->getCreationTimestamp()->getTimestamp() > (time() - 60),
+            'Creation timestamp is not within the last minute.'
+        );
     }
 
     public function runGetAllTests()

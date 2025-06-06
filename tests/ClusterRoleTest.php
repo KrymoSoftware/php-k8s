@@ -82,6 +82,10 @@ class ClusterRoleTest extends TestCase
         $this->assertEquals('admin-cr', $cr->getName());
         $this->assertEquals(['tier' => 'backend'], $cr->getLabels());
         $this->assertEquals([$rule], $cr->getRules());
+        $this->assertTrue(
+            $cr->getCreationTimestamp()->getTimestamp() > (time() - 60),
+            'Creation timestamp is not within the last minute.'
+        );
     }
 
     public function runGetAllTests()

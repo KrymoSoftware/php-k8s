@@ -118,6 +118,10 @@ class RoleBindingTest extends TestCase
         $this->assertEquals(['tier' => 'backend'], $rb->getLabels());
         $this->assertEquals([$subject], $rb->getSubjects());
         $this->assertEquals(['apiGroup' => 'rbac.authorization.k8s.io', 'kind' => 'Role', 'name' => 'admin'], $rb->getRole());
+        $this->assertTrue(
+            $rb->getCreationTimestamp()->getTimestamp() > (time() - 60),
+            'Creation timestamp is not within the last minute.'
+        );
     }
 
     public function runGetAllTests()

@@ -73,6 +73,10 @@ class StorageClassTest extends TestCase
         $this->assertEquals('csi.aws.amazon.com', $sc->getProvisioner());
         $this->assertEquals(['type' => 'io1', 'iopsPerGB' => 10], $sc->getParameters());
         $this->assertEquals(['debug'], $sc->getMountOptions());
+        $this->assertTrue(
+            $sc->getCreationTimestamp()->getTimestamp() > (time() - 60),
+            'Creation timestamp is not within the last minute.'
+        );
     }
 
     public function runGetAllTests()

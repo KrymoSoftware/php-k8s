@@ -99,6 +99,10 @@ class ValidatingWebhookConfigurationTest extends TestCase
         $this->assertEquals(['tier' => 'webhook'], $validatingWebhookConfiguration->getLabels());
         $this->assertArrayHasKey('webhook/annotation', $validatingWebhookConfiguration->getAnnotations());
         $this->assertEquals(1, count($validatingWebhookConfiguration->getWebhooks()));
+        $this->assertTrue(
+            $validatingWebhookConfiguration->getCreationTimestamp()->getTimestamp() > (time() - 60),
+            'Creation timestamp is not within the last minute.'
+        );
 
         foreach ($validatingWebhookConfiguration->getWebhooks() as $vw) {
             $this->assertEquals($webhook->getName(), $vw->getName());

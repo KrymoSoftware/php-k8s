@@ -81,6 +81,10 @@ class ServiceTest extends TestCase
             'protocol' => 'TCP', 'port' => 80, 'targetPort' => 80,
         ]], $svc->getPorts());
         $this->assertEquals("{$svc->getName()}.{$svc->getNamespace()}.svc.cluster.local", $svc->getClusterDns());
+        $this->assertTrue(
+            $svc->getCreationTimestamp()->getTimestamp() > (time() - 60),
+            'Creation timestamp is not within the last minute.'
+        );
     }
 
     public function runGetAllTests()

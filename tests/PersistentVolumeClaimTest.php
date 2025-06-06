@@ -77,6 +77,10 @@ class PersistentVolumeClaimTest extends TestCase
         $this->assertEquals('1Gi', $pvc->getCapacity());
         $this->assertEquals(['ReadWriteOnce'], $pvc->getAccessModes());
         $this->assertEquals('standard', $pvc->getStorageClass());
+        $this->assertTrue(
+            $pvc->getCreationTimestamp()->getTimestamp() > (time() - 60),
+            'Creation timestamp is not within the last minute.'
+        );
 
         if ($standard->getVolumeBindingMode() == 'Immediate') {
             while (! $pvc->isBound()) {

@@ -114,6 +114,10 @@ class PodDisruptionBudgetTest extends TestCase
         $this->assertEquals(['mysql/annotation' => 'yes'], $pdb->getAnnotations());
         $this->assertEquals('25%', $pdb->getMaxUnavailable());
         $this->assertEquals(null, $pdb->getMinAvailable());
+        $this->assertTrue(
+            $pdb->getCreationTimestamp()->getTimestamp() > (time() - 60),
+            'Creation timestamp is not within the last minute.'
+        );
 
         while (! $dep->allPodsAreRunning()) {
             dump("Waiting for pods of {$dep->getName()} to be up and running...");
