@@ -23,16 +23,13 @@ jobs:
       matrix:
         php: ['8.2', '8.3', '8.4']
         kubernetes: ['1.31.9', '1.32.5', '1.33.1']
-        laravel: ['12.*']
         prefer: [prefer-stable]
         include:
-          - laravel: "12.*"
-            testbench: "10.*"
+          - testbench: "10.*"
         exclude:
-          - laravel: "12.*"
-            php: "8.1"
+          - php: "8.1"
 
-    name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }} - K8s v${{ matrix.kubernetes }} --${{ matrix.prefer }}
+    name: PHP ${{ matrix.php }} - K8s v${{ matrix.kubernetes }} --${{ matrix.prefer }}
 
     steps:
       - uses: actions/checkout@v3
@@ -48,7 +45,7 @@ jobs:
         name: Cache dependencies
         with:
           path: ~/.composer/cache/files
-          key: composer-php-${{ matrix.php }}-${{ matrix.laravel }}-${{ matrix.prefer }}-${{ hashFiles('composer.json') }}
+          key: composer-php-${{ matrix.php }}-${{ matrix.prefer }}-${{ hashFiles('composer.json') }}
 
       - uses: medyagh/setup-minikube@latest
         name: Setup Minikube
@@ -63,7 +60,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+          composer require "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
           composer update --${{ matrix.prefer }} --prefer-dist --no-interaction
 
       - name: Setup in-cluster config
